@@ -1,0 +1,1448 @@
+/* static/css/main.css */
+
+/* --- Variables --- */
+:root {
+    --color-green: #008C45;
+    --color-white: #F4F5F0;
+    --color-red: #CD212A;
+    --color-dark-grey: #333;
+    --color-light-grey: #f9f9f9;
+    --color-text-light: #666;
+    --color-accent-blue: #007bff;
+
+    --font-primary: 'Inter', sans-serif;
+    --font-heading: 'Inter', sans-serif;
+
+    --header-height: 80px; /* Убедитесь, что это соответствует фактической высоте хедера */
+    --transition-speed: 0.3s;
+    --border-radius: 8px;
+    --box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    --container-max-width: 1200px;
+    --section-padding: 60px 0;
+}
+
+/* --- Base Styles --- */
+html, body {
+    height: 100%; /* Гарантируем, что html и body занимают всю высоту viewport */
+    margin: 0;
+}
+
+body {
+    font-family: var(--font-primary);
+    background-color: var(--color-white);
+    color: var(--color-dark-grey);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
+    /* Sticky Footer: Располагаем элементы в колонку */
+    display: flex;
+    flex-direction: column;
+}
+
+/* Sticky Footer: Позволяет секции main растягиваться */
+main {
+    flex: 1;
+    /* Учитываем высоту хедера, чтобы контент не перекрывался */
+    padding-top: var(--header-height);
+}
+
+.container {
+    max-width: var(--container-max-width);
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 0 15px;
+    }
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    margin-top: 0;
+    margin-bottom: 0.5em;
+    color: var(--color-dark-grey); /* Черный текст по умолчанию для заголовков */
+}
+
+h1 { font-size: 3em; }
+h2 { font-size: 2.5em; }
+h3 { font-size: 2em; }
+h4 { font-size: 1.5em; }
+
+p {
+    margin-bottom: 1em;
+    text-align: left; /* По умолчанию параграфы выравниваем по левому краю */
+}
+
+a {
+    color: var(--color-red);
+    text-decoration: none;
+    transition: color var(--transition-speed) ease;
+}
+
+a:hover {
+    color: var(--color-green);
+}
+
+.btn {
+    display: inline-block;
+    background-color: var(--color-red);
+    color: var(--color-white);
+    padding: 12px 25px;
+    text-decoration: none;
+    border-radius: var(--border-radius);
+    transition: background-color var(--transition-speed) ease, transform var(--transition-speed) ease;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.btn:hover {
+    background-color: #a81c22; /* Darker red */
+    transform: translateY(-2px);
+}
+.btn:active {
+    transform: translateY(0);
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.2); /* Using RGBA directly for white */
+    transition: left 0.4s ease-in-out;
+    z-index: -1;
+    transform: skewX(-20deg);
+}
+
+.btn:hover::before {
+    left: 100%;
+}
+
+section {
+    padding: var(--section-padding);
+    overflow: hidden;
+}
+
+section:nth-of-type(odd) {
+    background-color: var(--color-light-grey);
+}
+
+/* Общие стили для заголовков секций */
+section h3 {
+    font-size: 2.5em;
+    margin-bottom: 40px;
+    color: var(--color-green);
+    position: relative;
+    display: inline-block;
+    text-align: center; /* Центрируем заголовки секций */
+    width: 100%; /* Убедимся, что занимает всю ширину для центрирования */
+}
+
+section h3::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: -10px;
+    width: 80px;
+    height: 4px;
+    background-color: var(--color-red);
+    border-radius: 2px;
+}
+
+@media (max-width: 768px) {
+    section h3 {
+        font-size: 1.8em;
+        margin-bottom: 30px;
+    }
+}
+
+/* Общие стили для параграфов внутри секций */
+section p {
+    max-width: 800px;
+    margin: 0 auto 20px auto;
+    color: var(--color-text-light);
+    text-align: center; /* Центрируем параграфы в общих секциях по умолчанию */
+}
+
+/* --- Header --- */
+.header {
+    background-color: var(--color-white);
+    padding: 15px 0;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    transition: background-color var(--transition-speed) ease;
+    height: var(--header-height);
+    display: flex;
+    align-items: center;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+@media (max-width: 768px) {
+    .header-content {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+}
+
+.logo {
+    flex-shrink: 0;
+}
+
+@media (max-width: 768px) {
+    .logo {
+        width: 100%;
+        text-align: center;
+        margin-bottom: 10px;
+    }
+}
+
+.logo img {
+    height: 60px;
+    display: block;
+    margin: 0 auto;
+    transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.logo img:hover {
+    transform: scale(1.05);
+}
+
+.main-nav {
+    display: flex;
+    align-items: center;
+}
+
+@media (max-width: 768px) {
+    .main-nav {
+        width: 100%;
+        justify-content: flex-end;
+    }
+}
+
+.nav-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+@media (max-width: 768px) {
+    .nav-list {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: var(--header-height);
+        left: 0;
+        width: 100%;
+        background-color: var(--color-white);
+        box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+        padding: 20px 0;
+        z-index: 999;
+        border-radius: var(--border-radius);
+        overflow: hidden;
+        transform: translateY(-100%);
+        opacity: 0;
+        transition: transform 0.4s ease-out, opacity 0.4s ease-out;
+    }
+
+    .nav-list.open {
+        display: flex;
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.nav-list li {
+    margin-left: 25px;
+}
+
+@media (max-width: 768px) {
+    .nav-list li {
+        margin: 10px 0;
+        text-align: center;
+    }
+}
+
+.nav-list a {
+    text-decoration: none;
+    color: var(--color-dark-grey);
+    font-weight: bold;
+    position: relative;
+    padding: 5px 0;
+}
+
+.nav-list a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    display: block;
+    margin-top: 5px;
+    right: 0;
+    background: var(--color-green);
+    transition: width var(--transition-speed) ease;
+}
+
+.nav-list a:hover::after {
+    width: 100%;
+    left: 0;
+    background: var(--color-red);
+}
+
+.hamburger-menu {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    width: 30px;
+    height: 20px;
+    position: relative;
+    z-index: 1100;
+}
+
+@media (max-width: 768px) {
+    .hamburger-menu {
+        display: block;
+        order: 1;
+    }
+}
+
+.hamburger-menu .bar {
+    display: block;
+    width: 100%;
+    height: 3px;
+    background-color: var(--color-dark-grey);
+    margin-bottom: 5px;
+    border-radius: 2px;
+    transition: all var(--transition-speed) ease-in-out;
+}
+
+.hamburger-menu .bar:last-child {
+    margin-bottom: 0;
+}
+
+.hamburger-menu.open .bar:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+.hamburger-menu.open .bar:nth-child(2) { opacity: 0; }
+.hamburger-menu.open .bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+
+/* --- Language Switcher --- */
+.language-switcher {
+    position: relative;
+    display: inline-block;
+    margin-left: 20px;
+}
+
+@media (max-width: 768px) {
+    .language-switcher {
+        margin: 15px auto;
+        width: fit-content;
+    }
+}
+
+.language-switcher .dropbtn {
+    background-color: var(--color-green);
+    color: var(--color-white);
+    padding: 8px 12px;
+    font-size: 14px;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color var(--transition-speed) ease;
+}
+
+.language-switcher .dropbtn:hover {
+    background-color: #007a3b; /* Darker green */
+}
+
+.language-switcher .dropbtn i {
+    margin-left: 5px;
+}
+
+.language-switcher .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 120px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    right: 0;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+}
+
+.language-switcher .dropdown-content a {
+    color: var(--color-dark-grey);
+    padding: 10px 14px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+}
+
+.language-switcher .dropdown-content a:hover {
+    background-color: var(--color-red);
+    color: var(--color-white);
+}
+
+.language-switcher:hover .dropdown-content {
+    display: block;
+}
+
+/* --- Hero Section --- */
+.hero-section {
+    position: relative;
+    width: 100%;
+    height: 70vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    color: var(--color-white);
+    text-align: center; /* Центрируем содержимое Hero-секции */
+}
+
+.hero-section .homepage-video, .hero-section .hero-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+}
+
+.hero-section .hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6); /* Темный оверлей для читаемости */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+    padding: 20px;
+    backdrop-filter: blur(3px); /* Небольшое размытие фона за текстом (современные браузеры) */
+}
+
+/* Контейнер для текста на Hero-секции */
+.hero-text-container {
+    background-color: rgba(128, 128, 128, 0.7); /* Серо-прозрачный фон */
+    border-radius: var(--border-radius); /* Закругленные углы */
+    padding: 20px 30px; /* Уменьшенные отступы */
+    max-width: 600px; /* Уменьшенная максимальная ширина */
+    margin: 0 auto; /* Центрируем */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); /* Небольшая тень для объема */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Центрируем содержимое по горизонтали */
+    backdrop-filter: blur(8px); /* Увеличим размытие фона за блоком */
+    border: 2px solid rgba(255, 255, 255, 0.5); /* Добавим тонкую белую рамку */
+}
+
+/* Стили для контейнера логотипа внутри Hero-секции */
+.hero-logo-container {
+    margin-bottom: 15px; /* Отступ между логотипом и заголовком */
+}
+
+.hero-logo-container img {
+    height: 80px; /* Уменьшенная высота логотипа */
+    width: auto;
+    display: block;
+}
+
+.hero-section h1 {
+    font-size: 4em; /* Немного уменьшим шрифт для компактности */
+    margin-bottom: 10px; /* Уменьшим отступ */
+    color: #222; /* Темно-серый цвет */
+    text-shadow: none; /* Убираем тень */
+    line-height: 1.1;
+    text-align: center; /* Центрируем заголовок */
+}
+
+@media (max-width: 768px) {
+    .hero-section h1 {
+        font-size: 2.2em; /* Адаптивный размер */
+    }
+}
+
+.hero-section h2 {
+    font-size: 2em; /* Немного уменьшим шрифт для компактности */
+    margin-bottom: 20px; /* Уменьшим отступ */
+    color: #222; /* Темно-серый цвет */
+    text-shadow: none; /* Убираем тень */
+    text-align: center; /* Центрируем слоган */
+}
+
+@media (max-width: 768px) {
+    .hero-section h2 {
+        font-size: 1.3em; /* Адаптивный размер */
+    }
+}
+
+/* Стили для текста "Over 5000+ satisfied clients" */
+.hero-section .clients-count-text {
+    font-size: 1.6em; /* Немного уменьшим размер */
+    font-weight: 900;
+    color: var(--color-white); /* Белый цвет для контраста с красным фоном */
+    background-color: var(--color-red); /* Красный фон */
+    padding: 8px 18px; /* Уменьшенные отступы */
+    border-radius: var(--border-radius);
+    margin-top: 15px; /* УМЕНЬШЕННЫЙ ОТСТУП СВЕРХУ */
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.5); /* Тень для лучшей читаемости */
+    letter-spacing: 1px;
+}
+
+@media (max-width: 768px) {
+    .hero-section .clients-count-text {
+        font-size: 1.1em;
+        padding: 6px 12px;
+    }
+}
+
+/* --- Page Hero --- */
+.page-hero {
+    position: relative;
+    width: 100%;
+    height: 40vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    color: var(--color-white);
+    text-align: center;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.page-hero .hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+    padding: 20px;
+}
+
+.page-hero h1 {
+    font-size: 3.5em;
+    margin-bottom: 10px;
+    color: var(--color-white);
+    text-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+}
+
+@media (max-width: 768px) {
+    .page-hero h1 {
+        font-size: 2em;
+    }
+}
+
+.page-hero p {
+    font-size: 1.2em;
+    color: rgba(255, 255, 255, 0.9); /* Using RGBA directly for white */
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+    .page-hero p {
+        font-size: 0.9em;
+    }
+}
+
+/* --- Service Cards --- */
+.service-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.service-card {
+    background-color: var(--color-white);
+    padding: 30px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    text-align: center; /* Выравнивание текста в карточке услуги по центру */
+    transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+}
+
+.service-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+.service-card .service-icon {
+    font-size: 3em;
+    color: var(--color-green);
+    margin-bottom: 20px;
+    display: block;
+    text-align: center;
+    transition: color var(--transition-speed) ease, transform var(--transition-speed) ease;
+}
+
+.service-card:hover .service-icon {
+    color: var(--color-red);
+    transform: scale(1.1) rotate(5deg);
+}
+
+.service-card h4 {
+    color: var(--color-red);
+    margin-top: 0;
+    font-size: 1.8em;
+    text-align: center;
+}
+
+.service-card p {
+    color: var(--color-text-light);
+    margin-bottom: 15px;
+    text-align: center; /* Выравнивание текста параграфа в карточке услуги по центру */
+}
+
+.service-card .price {
+    font-weight: bold;
+    color: var(--color-green);
+    margin-top: 15px;
+    font-size: 1.2em;
+    text-align: center;
+}
+
+/* --- Team Cards --- */
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.team-member-card {
+    background-color: var(--color-white);
+    padding: 20px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    text-align: center;
+    transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+}
+
+.team-member-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+.team-member-card img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 20px;
+    border: 4px solid var(--color-green);
+    transition: transform var(--transition-speed) ease;
+}
+
+.team-member-card img:hover {
+    transform: scale(1.05);
+}
+
+.team-member-card h4 {
+    color: var(--color-red);
+    margin-bottom: 5px;
+    font-size: 1.6em;
+}
+
+.team-member-card .position {
+    font-style: italic;
+    color: var(--color-text-light);
+    margin-bottom: 10px;
+}
+
+.team-member-card .experience {
+    font-size: 0.95em;
+    color: var(--color-dark-grey);
+    margin-bottom: 15px;
+    text-align: center; /* Выравнивание по центру */
+}
+
+.team-member-card .social-links {
+    margin-top: 15px;
+}
+
+.team-member-card .social-links a {
+    display: inline-block;
+    margin: 0 8px;
+    font-size: 1.5em;
+    color: var(--color-dark-grey);
+    transition: color var(--transition-speed) ease, transform var(--transition-speed) ease;
+}
+
+.team-member-card .social-links a:hover {
+    color: var(--color-accent-blue);
+    transform: scale(1.1);
+}
+
+/* --- Animations (basic CSS animations) --- */
+.animate-on-scroll {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.animate-on-scroll.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* --- About Us Page --- */
+.about-us-content {
+    /* Основной контейнер секции "About Us" */
+    text-align: center; /* Центрируем содержимое секции */
+}
+
+.about-us-content .content-block {
+    /* Этот блок уже центрирован с помощью margin: 0 auto; в .container */
+}
+
+.about-us-content .section-title {
+    /* Этот заголовок уже центрирован через общие правила section h3 */
+}
+
+.about-us-content p {
+    /* Параграфы под заголовком "Our Story & Values" */
+    text-align: center; /* Центрируем этот параграф */
+    max-width: 800px; /* Ограничиваем ширину для лучшей читаемости */
+    margin: 0 auto 20px auto; /* Центрируем сам параграф */
+}
+
+.values-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+    /* Центрируем саму сетку, если она не занимает всю ширину */
+    justify-items: center; /* Центрирует элементы внутри grid-контейнера */
+    align-items: start; /* Выравнивает элементы по верху */
+}
+
+.value-item {
+    background-color: var(--color-white);
+    padding: 30px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    text-align: center; /* Центрируем все содержимое внутри value-item */
+    transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+    max-width: 350px; /* Ограничиваем ширину карточки для лучшего центрирования */
+    width: 100%; /* Убежимся, что она занимает доступную ширину */
+    display: flex; /* Используем flexbox для выравнивания содержимого */
+    flex-direction: column;
+    align-items: center; /* Центрируем содержимое по горизонтали */
+    justify-content: flex-start; /* Выравниваем по верху */
+    min-height: 220px; /* Минимальная высота для единообразия */
+}
+
+.value-item:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+.value-item i {
+    font-size: 3em;
+    color: var(--color-green);
+    margin-bottom: 20px;
+    display: block; /* Важно: для text-align: center; родителя */
+}
+
+.value-item h4 {
+    color: var(--color-red);
+    margin-top: 0;
+    font-size: 1.8em;
+}
+
+.value-item p {
+    color: var(--color-text-light);
+    margin-bottom: 15px;
+    text-align: center; /* ИСПРАВЛЕНО: Центрируем текст в параграфе */
+}
+
+/* --- Mission and Vision Page Styles --- */
+.mission-vision-content {
+    /* Удаляем старые стили, которые центрировали mv-item, так как теперь используем сетку */
+    text-align: center; /* Центрируем заголовок секции и подзаголовок */
+}
+
+.mission-vision-grid {
+    display: grid;
+    grid-template-columns: 1fr; /* Одна колонка на мобильных */
+    gap: 30px;
+    margin-top: 40px;
+    justify-items: center; /* Центрирует элементы внутри grid-контейнера */
+    /* Убираем align-items: start; если хотим, чтобы карточки были одинаковой высоты */
+    /* align-items: stretch; */ /* Можно использовать для одинаковой высоты */
+}
+
+@media (min-width: 768px) {
+    .mission-vision-grid {
+        grid-template-columns: repeat(2, 1fr); /* Две колонки на планшетах и выше */
+    }
+}
+
+.mv-card {
+    background-color: var(--color-white);
+    padding: 30px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    text-align: center;
+    transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+    max-width: 500px; /* Ограничим максимальную ширину карточки, чтобы не растягивалась слишком сильно */
+    width: 100%; /* Убежимся, что она занимает доступную ширину */
+    display: flex; /* Используем flexbox для выравнивания содержимого */
+    flex-direction: column;
+    align-items: center; /* Центрируем содержимое по горизонтали */
+    justify-content: flex-start; /* Выравниваем по верху */
+    min-height: 200px; /* Минимальная высота для единообразия */
+}
+
+.mv-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+.mv-card i {
+    font-size: 3.5em; /* Размер иконки */
+    color: var(--color-green); /* Цвет иконки */
+    margin-bottom: 15px;
+    background-color: rgba(0, 140, 69, 0.1); /* Легкий фон для иконки */
+    border-radius: 50%;
+    width: 70px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mv-card h3 { /* ИЗМЕНЕНО: теперь h3 внутри карточки */
+    font-size: 2em; /* Размер заголовка */
+    color: var(--color-red); /* Цвет заголовка */
+    margin-bottom: 15px;
+    text-align: center; /* Центрируем заголовок внутри карточки */
+    width: 100%; /* Занимает всю ширину карточки */
+}
+
+/* Убираем подчеркивание у заголовков внутри карточек, если оно есть */
+.mv-card h3::after {
+    display: none;
+}
+
+.mv-card p {
+    font-size: 1em; /* Размер текста */
+    color: var(--color-text-light);
+    line-height: 1.6;
+    text-align: center; /* Центрируем текст внутри карточки */
+}
+
+/* --- Contact Section --- */
+.contact-section .contact-info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+    /* text-align: left; - Удаляем, чтобы управлять выравниванием внутри */
+}
+
+.contact-section .contact-info-grid .contact-item {
+    background-color: var(--color-white);
+    padding: 25px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    text-align: center; /* Центрируем содержимое каждой карточки */
+    transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+}
+
+.contact-section .contact-info-grid .contact-item:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+.contact-section .contact-info-grid .contact-item i {
+    font-size: 2.5em;
+    color: var(--color-green);
+    margin-bottom: 15px;
+}
+.contact-section .contact-info-grid .contact-item h4 {
+    color: var(--color-red);
+    margin-bottom: 10px;
+}
+.contact-section .contact-info-grid .contact-item p {
+    margin: 0;
+    color: var(--color-text-light);
+    text-align: center; /* Центрируем текст внутри карточки контакта */
+}
+.contact-section .contact-info-grid .contact-item a {
+    display: block;
+    margin-top: 5px;
+    color: var(--color-accent-blue);
+}
+.contact-section .contact-info-grid .contact-item a:hover {
+    text-decoration: underline;
+}
+
+.contact-section .social-links {
+    margin-top: 40px;
+    text-align: center; /* Центрируем социальные иконки */
+}
+.contact-section .social-links a {
+    display: inline-block;
+    margin: 0 15px;
+    font-size: 2.5em;
+    color: var(--color-dark-grey);
+    transition: color var(--transition-speed) ease, transform var(--transition-speed) ease;
+}
+
+.contact-section .social-links a:hover {
+    color: var(--color-red);
+    transform: scale(1.1);
+}
+
+/* Styles for Contact Form */
+.contact-form-container {
+    margin-top: 60px;
+    background-color: var(--color-white);
+    padding: 40px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left; /* Выравнивание текста внутри контейнера формы */
+}
+
+.contact-form-container h4 {
+    text-align: center;
+    color: var(--color-green);
+    font-size: 2em;
+    margin-bottom: 30px;
+}
+
+.contact-form label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: var(--color-dark-grey);
+}
+
+.contact-form input[type="text"],
+.contact-form input[type="email"],
+.contact-form textarea {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box; /* Учитываем padding в ширине */
+    font-family: var(--font-primary);
+    font-size: 1em;
+    transition: border-color 0.3s ease;
+}
+
+.contact-form input[type="text"]:focus,
+.contact-form input[type="email"]:focus,
+.contact-form textarea:focus {
+    border-color: var(--color-green);
+    outline: none;
+}
+
+.contact-form textarea {
+    min-height: 120px;
+    resize: vertical; /* Разрешить изменение размера по вертикали */
+}
+
+.contact-form .btn {
+    width: 100%;
+    padding: 15px;
+    font-size: 1.1em;
+}
+
+/* Styles for Django messages */
+.messages {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+    text-align: center;
+}
+
+.messages li {
+    padding: 10px 20px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.messages .success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.messages .error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+.messages .warning {
+    background-color: #fff3cd;
+    color: #856404;
+    border: 1px solid #ffeeba;
+}
+
+.messages .info {
+    background-color: #d1ecf1;
+    color: #0c5460;
+    border: 1px solid #bee5eb;
+}
+
+/* --- Footer --- */
+.footer {
+    background-color: var(--color-dark-grey); /* Темный фон */
+    color: var(--color-white); /* Белый текст */
+    padding: 40px 0;
+    text-align: center; /* Центрируем весь текст футера */
+    margin-top: 60px;
+}
+
+.footer .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Центрируем элементы по горизонтали */
+    justify-content: center;
+}
+
+.footer p {
+    margin-bottom: 10px;
+    font-size: 0.9em;
+    color: rgba(255, 255, 255, 0.8); /* Белый текст с небольшой прозрачностью */
+}
+
+.footer .footer-contacts {
+    margin-top: 20px;
+}
+
+.footer .footer-contacts p {
+    margin: 5px 0;
+    font-size: 1em;
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Центрируем содержимое каждой строки контактов */
+}
+
+.footer .footer-contacts p i {
+    margin-right: 10px;
+    color: var(--color-green);
+}
+
+.footer .footer-contacts p a {
+    color: var(--color-white);
+}
+
+.footer .footer-contacts p a:hover {
+    color: var(--color-red);
+}
+
+.footer .footer-social {
+    margin-top: 20px;
+}
+
+.footer .footer-social a {
+    display: inline-block;
+    margin: 0 10px;
+    font-size: 1.8em;
+    color: var(--color-white);
+    transition: color var(--transition-speed) ease, transform var(--transition-speed) ease;
+}
+
+.footer .footer-social a:hover {
+    color: var(--color-green);
+    transform: scale(1.1);
+}
+
+/* Styles for specific sections on index.html to center buttons */
+.about-company {
+    text-align: center; /* Центрирует кнопку "Learn More" */
+}
+
+.services-overview {
+    text-align: center; /* Центрирует кнопку "View All Services" */
+}
+
+/* New styles for the simplified contact call to action section */
+.contact-call-to-action {
+    background-color: var(--color-white); /* ИЗМЕНЕНО: Фон теперь белый */
+    color: var(--color-dark-grey); /* ИЗМЕНЕНО: Цвет текста теперь темно-серый */
+    padding: 80px 0; /* Увеличим отступы для большего визуального веса */
+    text-align: center; /* Центрируем все содержимое */
+}
+
+.contact-call-to-action h3 {
+    color: var(--color-green); /* ИЗМЕНЕНО: Заголовок теперь зеленый */
+    margin-bottom: 20px;
+}
+
+/* Убираем подчеркивание у заголовка в этой секции, если оно есть */
+.contact-call-to-action h3::after {
+    display: none;
+}
+
+.contact-call-to-action p {
+    max-width: 700px;
+    margin: 0 auto 30px auto; /* Центрируем параграф и добавляем отступ снизу */
+    font-size: 1.2em;
+    line-height: 1.5;
+    color: var(--color-text-light); /* ИЗМЕНЕНО: Цвет текста параграфа */
+}
+
+.contact-call-to-action .btn {
+    background-color: var(--color-red); /* ИЗМЕНЕНО: Кнопка теперь красная */
+    color: var(--color-white);
+    padding: 15px 35px;
+    font-size: 1.2em;
+    border-radius: var(--border-radius);
+}
+
+.contact-call-to-action .btn:hover {
+    background-color: #a81c22; /* Более темный красный при наведении */
+}
+
+/* --- New "Why Choose Us" section styles --- */
+.why-choose-us {
+    background-color: var(--color-white); /* Фон секции */
+    text-align: center; /* Центрируем содержимое секции */
+}
+
+.why-choose-us .section-subtitle {
+    font-size: 1.2em;
+    color: var(--color-text-light);
+    margin-bottom: 50px; /* Отступ под подзаголовком */
+    display: block; /* Убедимся, что это блочный элемент для text-align */
+}
+
+.facts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+    justify-items: center; /* Центрирует элементы внутри grid-контейнера */
+    align-items: start; /* Выравнивает элементы по верху */
+}
+
+.fact-item {
+    background-color: var(--color-white);
+    padding: 30px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    text-align: center;
+    transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+    max-width: 350px; /* Ограничиваем ширину карточки */
+    width: 100%; /* Убежимся, что она занимает доступную ширину */
+    display: flex; /* Используем flexbox для выравнивания содержимого */
+    flex-direction: column;
+    align-items: center; /* Центрируем содержимое по горизонтали */
+    justify-content: flex-start; /* Выравниваем по верху */
+    min-height: 220px; /* Минимальная высота для единообразия */
+}
+
+.fact-item:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+.fact-item i {
+    font-size: 3.5em; /* Размер иконки */
+    color: var(--color-green); /* Цвет иконки */
+    margin-bottom: 15px;
+    background-color: rgba(0, 140, 69, 0.1); /* Легкий фон для иконки */
+    border-radius: 50%;
+    width: 70px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.fact-item h4 {
+    font-size: 2.2em; /* Размер основного числа/заголовка */
+    color: var(--color-red); /* Цвет числа/заголовка */
+    margin-bottom: 5px;
+}
+
+.fact-item p {
+    font-size: 1.1em; /* Размер краткого описания */
+    color: var(--color-dark-grey);
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.fact-item .fact-description {
+    font-size: 0.9em; /* Размер детального описания */
+    color: var(--color-text-light);
+    line-height: 1.4;
+}
+
+/* --- Floating Contact Button with Dropdown --- */
+.contact-float-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 9999;
+    /* Убираем flex-контейнер для родителя, чтобы дочерний dropdown позиционировался относительно него */
+    /* display: flex; */
+    /* flex-direction: column; */
+    /* align-items: flex-end; */
+}
+
+.main-contact-btn {
+    width: 60px;
+    height: 60px;
+    background-color: var(--color-green); /* Зеленый цвет для основной кнопки */
+    color: white;
+    border-radius: 50%;
+    text-align: center;
+    font-size: 2.5em;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.main-contact-btn:hover {
+    transform: scale(1.1);
+    background-color: #007a3b; /* Темнее зеленый при наведении */
+}
+
+.contact-dropdown-content {
+    /* ИЗМЕНЕНО: Используем visibility и opacity для плавного появления/исчезновения */
+    visibility: hidden; /* Скрыто по умолчанию, но занимает место */
+    opacity: 0; /* Полностью прозрачно */
+    position: absolute; /* Позиционируем относительно родителя (.contact-float-button) */
+    bottom: calc(100% + 10px); /* Позиционируем над кнопкой + отступ */
+    right: 0; /* Выравниваем по правому краю кнопки */
+    flex-direction: column; /* Для вертикального расположения ссылок */
+    background-color: var(--color-white);
+    min-width: 180px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    /* Анимация: начинается немного ниже и полностью прозрачная */
+    transform: translateY(10px);
+    
+    /* ИЗМЕНЕНО: Задержка для visibility, чтобы opacity успела отработать */
+    transition: opacity 0.3s ease-out, transform 0.3s ease-out, visibility 0s linear 0.3s;
+}
+
+/* ИЗМЕНЕНО: При наведении на родительский контейнер */
+.contact-float-button:hover .contact-dropdown-content {
+    visibility: visible; /* Показываем */
+    opacity: 1; /* Делаем видимым */
+    transform: translateY(0); /* Возвращаем в исходное положение */
+    transition-delay: 0s; /* Убираем задержку при появлении */
+}
+
+.contact-dropdown-content a {
+    color: var(--color-dark-grey);
+    padding: 12px 16px;
+    text-decoration: none;
+    display: flex; /* Для выравнивания иконки и текста */
+    align-items: center;
+    text-align: left;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.contact-dropdown-content a:hover {
+    background-color: var(--color-light-grey);
+    color: var(--color-green);
+}
+
+.contact-dropdown-content a i {
+    margin-right: 10px;
+    font-size: 1.2em;
+    color: var(--color-green); /* Иконки зеленые по умолчанию */
+    transition: color 0.3s ease;
+}
+
+.contact-dropdown-content a:hover i {
+    color: var(--color-red); /* Иконки красные при наведении */
+}
+
+/* --- Modal (Popup) Styles --- */
+.modal {
+    display: none; /* Скрыто по умолчанию */
+    position: fixed; /* Оставаться на месте */
+    z-index: 10000; /* Сильно выше всего остального */
+    left: 0;
+    top: 0;
+    width: 100%; /* Полная ширина */
+    height: 100%; /* Полная высота */
+    overflow: auto; /* Включить прокрутку, если контент слишком большой */
+    background-color: rgba(0, 0, 0, 0.7); /* Черный фон с прозрачностью */
+    display: flex; /* Используем flexbox для центрирования */
+    align-items: center; /* Центрируем по вертикали */
+    justify-content: center; /* Центрируем по горизонтали */
+    backdrop-filter: blur(5px); /* Размытие фона */
+    -webkit-backdrop-filter: blur(5px); /* Для Safari */
+}
+
+.modal-content {
+    background-color: var(--color-white);
+    margin: auto; /* Центрирование в старой модели flexbox */
+    padding: 30px;
+    border-radius: var(--border-radius);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    position: relative;
+    max-width: 500px; /* Максимальная ширина модального окна */
+    width: 90%; /* Адаптивная ширина */
+    animation: fadeInScale 0.3s ease-out; /* Анимация появления */
+    box-sizing: border-box; /* Учитываем padding в ширине */
+}
+
+/* Анимация появления модального окна */
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.close-button {
+    color: var(--color-dark-grey);
+    font-size: 28px;
+    font-weight: bold;
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: var(--color-red);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal-title {
+    color: var(--color-green);
+    text-align: center;
+    margin-bottom: 10px;
+    font-size: 2.2em;
+}
+
+.modal-subtitle {
+    color: var(--color-text-light);
+    text-align: center;
+    margin-bottom: 25px;
+    font-size: 1.1em;
+}
+
+.modal .form-group {
+    margin-bottom: 15px;
+}
+
+.modal .form-control {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-family: var(--font-primary);
+    font-size: 1em;
+    transition: border-color 0.3s ease;
+}
+
+.modal .form-control:focus {
+    border-color: var(--color-green);
+    outline: none;
+}
+
+.modal .btn {
+    width: 100%;
+    padding: 12px;
+    font-size: 1.1em;
+}
+
+.popup-message {
+    text-align: center;
+    margin-top: 15px;
+    padding: 10px;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+.popup-message.success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.popup-message.error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+.popup-message.loading {
+    background-color: #e0f7fa;
+    color: #00796b;
+    border: 1px solid #b2ebf2;
+}
+
+/* Prevent body scrolling when modal is open */
+body.modal-open {
+    overflow: hidden;
+}
+
+/* Responsive adjustments for modal */
+@media (max-width: 600px) {
+    .modal-content {
+        padding: 20px;
+        width: 95%;
+    }
+    .modal-title {
+        font-size: 1.8em;
+    }
+    .modal-subtitle {
+        font-size: 1em;
+    }
+}

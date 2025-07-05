@@ -1,0 +1,69 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% load i18n %}
+{% load crispy_forms_tags %} {# Если используете django-crispy-forms, иначе убрать #}
+
+{% block content %}
+<section class="page-hero" style="background-image: url('{% static 'img/contact-hero.jpg' %}');">
+    <div class="hero-overlay">
+        <h1>{% translate "Contact Us" %}</h1>
+        <p>{% translate "We are ready to answer your questions." %}</p>
+    </div>
+</section>
+
+<section class="contact-section animate-on-scroll">
+    <div class="container">
+        <h3>{% translate "Get in Touch" %}</h3>
+
+        {# Сообщения от Django (success/error) #}
+        {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+        <div class="contact-info-grid">
+            <div class="contact-item animate-on-scroll">
+                <i class="fas fa-map-marker-alt"></i>
+                <h4>{% translate "Address" %}</h4>
+                <p>{{ company_info.address }}</p>
+            </div>
+            <div class="contact-item animate-on-scroll">
+                <i class="fas fa-clock"></i>
+                <h4>{% translate "Working Hours" %}</h4>
+                <p>{% translate "Mon-Fri:" %} {{ company_info.working_hours_mon_fri }}</p>
+                <p>{% translate "Saturday:" %} {{ company_info.working_hours_sat }}</p>
+            </div>
+            <div class="contact-item animate-on-scroll">
+                <i class="fas fa-envelope"></i>
+                <h4>{% translate "Email" %}</h4>
+                <p><a href="mailto:{{ company_info.email }}">{{ company_info.email }}</a></p>
+            </div>
+            <div class="contact-item animate-on-scroll">
+                <i class="fas fa-phone"></i>
+                <h4>{% translate "Phone" %}</h4>
+                <p><a href="tel:{{ company_info.phone }}">{{ company_info.phone }}</a></p>
+            </div>
+        </div>
+
+        <div class="contact-form-container animate-on-scroll">
+            <h4>{% translate "Send Us a Message" %}</h4>
+            <form method="post" class="contact-form">
+                {% csrf_token %} {# Важно для безопасности Django #}
+                {{ form.as_p }} {# Простой вывод полей формы #}
+                {# Если вы хотите более красивый вывод, рассмотрите django-crispy-forms #}
+                {# {{ form|crispy }} #}
+                <button type="submit" class="btn">{% translate "Send Message" %}</button>
+            </form>
+        </div>
+
+        <div class="social-links animate-on-scroll">
+            {% if company_info.telegram_link %}<a href="{{ company_info.telegram_link }}" target="_blank" aria-label="Telegram"><i class="fab fa-telegram-plane"></i></a>{% endif %}
+            {% if company_info.instagram_link %}<a href="{{ company_info.instagram_link }}" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>{% endif %}
+            {% if company_info.linkedin_link %}<a href="{{ company_info.linkedin_link }}" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>{% endif %}
+        </div>
+    </div>
+</section>
+{% endblock %}

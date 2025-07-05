@@ -1,0 +1,32 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block content %}
+    <section class="page-hero" style="background-image: url('{% static 'img/services-hero.jpg' %}');">
+        <div class="hero-overlay">
+            <h1>{% translate "Our Comprehensive Services" %}</h1>
+            <p>{% translate "Tailored solutions for your success in Italy and Central Asia." %}</p>
+        </div>
+    </section>
+
+    <section class="services-full-list animate-on-scroll">
+        <div class="container">
+            <h3>{% translate "Detailed List of Our Services" %}</h3>
+            <div class="service-grid">
+                {% for service in services %}
+                <div class="service-card animate-on-scroll">
+                    {% if service.icon_class %}<i class="{{ service.icon_class }} service-icon"></i>{% endif %}
+                    <h4>{{ service.title }}</h4>
+                    <p>{{ service.full_description }}</p>
+                    {% if service.price %}
+                        <p class="price">{% translate "Price:" %} {{ service.price }} EUR</p>
+                    {% endif %}
+                </div>
+                {% empty %}
+                <p>{% translate "No services available at the moment. Please check back later!" %}</p>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+{% endblock %}

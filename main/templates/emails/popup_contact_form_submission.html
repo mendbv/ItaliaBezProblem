@@ -1,0 +1,109 @@
+<!-- main/templates/emails/popup_contact_form_submission.html -->
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuova richiesta dal popup</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        /* CSS variables matching your main.css */
+        :root {
+            --color-green: #008C45;
+            --color-white: #F4F5F0;
+            --color-red: #CD212A;
+            --color-dark-grey: #333;
+            --color-light-grey: #f9f9f9;
+            --color-text-light: #666;
+
+            --font-primary: 'Inter', sans-serif;
+            --border-radius: 8px;
+            --box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        body {
+            font-family: var(--font-primary);
+            line-height: 1.6;
+            color: var(--color-dark-grey);
+            background-color: var(--color-light-grey);
+            margin: 0;
+            padding: 20px;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: var(--color-white);
+            padding: 30px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            border-top: 5px solid var(--color-green);
+        }
+        .header-section {
+            text-align: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        .header-section img {
+            max-width: 150px;
+            margin-bottom: 10px;
+        }
+        h2 {
+            color: var(--color-red);
+            font-size: 1.8em;
+            margin-top: 0;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        p {
+            margin-bottom: 10px;
+            color: var(--color-dark-grey);
+        }
+        strong {
+            color: var(--color-dark-grey);
+            font-weight: 600;
+        }
+        .message-box {
+            background-color: var(--color-white);
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin-top: 20px;
+            border-radius: var(--border-radius);
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.05);
+        }
+        .message-box p {
+            margin-bottom: 0;
+        }
+        .footer {
+            margin-top: 30px;
+            text-align: center;
+            font-size: 0.85em;
+            color: var(--color-text-light);
+            border-top: 1px solid #eee;
+            padding-top: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header-section">
+            <!-- Replace with the actual URL of your logo -->
+            <img src="https://placehold.co/150x50/008C45/FFFFFF?text=Logo" alt="Italia Bez Problem Logo">
+            <h2>Nuova richiesta dal popup del sito</h2>
+        </div>
+        <p><strong>Nome:</strong> {{ name }}</p>
+        <p><strong>Email:</strong> {{ email }}</p>
+        <p><strong>Telefono:</strong> {{ phone }}</p>
+        <div class="message-box">
+            <p><strong>Messaggio:</strong></p>
+            <p>{{ message|linebreaksbr }}</p>
+        </div>
+        <div class="footer">
+            <p>&copy; {% now "Y" %} Italia Bez Problem. Tutti i diritti riservati.</p>
+            <p>Questo è un messaggio automatico. Si prega di non rispondere.</p>
+        </div>
+    </div>
+</body>
+</html>

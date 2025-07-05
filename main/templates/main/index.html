@@ -1,0 +1,113 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block content %}
+    <section class="hero-section">
+        {% if company_info.homepage_video %}
+            <video autoplay loop muted playsinline class="homepage-video">
+                <source src="{{ company_info.homepage_video.url }}" type="video/mp4">
+                {% translate "Your browser does not support the video tag." %}
+            </video>
+        {% else %}
+            <img src="{% static 'img/hero-placeholder.jpg' %}" alt="Hero Image" class="hero-image">
+        {% endif %}
+        <div class="hero-overlay">
+            <div class="hero-text-container">
+                <div class="hero-logo-container"> {# Новый контейнер для логотипа #}
+                    <img src="{% static 'img/icon_notext.png' %}" alt="Italia Bez Problem Logo">
+                </div>
+                <h1>{{ company_info.name }}</h1>
+                <h2>{{ company_info.slogan }}</h2>
+                <p class="clients-count-text">{% translate "Over" %} {{ company_info.clients_count }}+ {% translate "satisfied clients" %}</p>
+            </div>
+        </div>
+    </section>
+
+    {# Новая секция "Почему выбирают нас?" #}
+    <section class="why-choose-us">
+        <div class="container">
+            <h3>{% translate "Why Choose Italia Bez Problem?" %}</h3>
+            <p class="section-subtitle">{% translate "Everything you need to succeed in Italy." %}</p> {# Добавил подзаголовок #}
+
+            <div class="facts-grid">
+                <div class="fact-item animate-on-scroll">
+                    <i class="fas fa-users"></i> {# Иконка для клиентов #}
+                    <h4>50+</h4>
+                    <p>{% translate "Happy Clients" %}</p>
+                    <span class="fact-description">{% translate "Successfully settled and established businesses in Italy" %}</span>
+                </div>
+                <div class="fact-item animate-on-scroll">
+                    <i class="fas fa-globe-americas"></i> {# Иконка для стран #}
+                    <h4>5</h4>
+                    <p>{% translate "Countries" %}</p>
+                    <span class="fact-description">{% translate "Serving clients from different countries worldwide" %}</span>
+                </div>
+                <div class="fact-item animate-on-scroll">
+                    <i class="fas fa-trophy"></i> {# Иконка для успеха #}
+                    <h4>98%</h4>
+                    <p>{% translate "Success Rate" %}</p>
+                    <span class="fact-description">{% translate "Success rate in visa applications" %}</span>
+                </div>
+                <div class="fact-item animate-on-scroll">
+                    <i class="fas fa-headset"></i> {# Иконка для поддержки #}
+                    <h4>24/7</h4>
+                    <p>{% translate "Support" %}</p>
+                    <span class="fact-description">{% translate "Continuous customer support and consulting services" %}</span>
+                </div>
+                <div class="fact-item animate-on-scroll">
+                    <i class="fas fa-euro-sign"></i> {# Иконка для инвестиций #}
+                    <h4>€2M+</h4>
+                    <p>{% translate "Investment" %}</p>
+                    <span class="fact-description">{% translate "Total investment made by our clients in Italy" %}</span>
+                </div>
+                <div class="fact-item animate-on-scroll">
+                    <i class="fas fa-calendar-alt"></i> {# Иконка для опыта #}
+                    <h4>5</h4>
+                    <p>{% translate "Years Experience" %}</p>
+                    <span class="fact-description">{% translate "Expertise in business and immigration in Italy" %}</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {# Секция "О нас" остается без изменений, так как она уже достаточно лаконична #}
+    <section class="about-company">
+        <div class="container">
+            <h3>{% translate "About Us" %}</h3>
+            <p>{{ company_info.about_us_short|truncatechars:300 }}</p>
+            <a href="{% url 'about_us' %}" class="btn">{% translate "Learn More" %}</a>
+        </div>
+    </section>
+
+    {# Секция "Наши услуги" остается без изменений, так как она уже достаточно лаконична #}
+    <section class="services-overview">
+        <div class="container">
+            <h3>{% translate "Our Services" %}</h3>
+            <div class="service-cards">
+                {% for service in services %}
+                    <div class="service-card">
+                        {# Если у вас есть иконки для услуг, они должны быть здесь. Например: #}
+                        {# <i class="fas fa-{{ service.icon_class }}"></i> #}
+                        <h4>{{ service.title }}</h4>
+                        <p>{{ service.short_description|truncatechars:150 }}</p>
+                        {% if service.price %}
+                            <p class="price">{% translate "Price:" %} {{ service.price }} EUR</p>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            </div>
+            <a href="{% url 'services' %}" class="btn">{% translate "View All Services" %}</a>
+        </div>
+    </section>
+
+    {# Обновленная секция "Контакты" - теперь это призыв к действию #}
+    <section class="contact-call-to-action"> {# Изменен класс для новой стилизации #}
+        <div class="container">
+            <h3>{% translate "Ready to work with us?" %}</h3>
+            <p>{% translate "Contact us today to discuss your needs and find the perfect solution." %}</p>
+            <a href="{% url 'contact' %}" class="btn">{% translate "Contact Us" %}</a>
+        </div>
+    </section>
+
+{% endblock %}

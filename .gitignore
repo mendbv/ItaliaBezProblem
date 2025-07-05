@@ -1,0 +1,49 @@
+# Python
+*.pyc
+__pycache__/
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.tox/
+.coverage
+htmlcov/
+venv/
+env/
+
+# Django
+*.log
+*.sqlite3
+media/
+staticfiles_collected/
+
+# Specific files within media to keep (if any, like .gitkeep)
+!media/.gitkeep
+
+# Translation files
+*.mo
+
+# Environment variables
+.env
+.env.docker
+
+# IDE specific files
+.vscode/
+.idea/
+*.iml
+*.sublime-project
+*.sublime-workspace
+
+# Operating System files
+.DS_Store
+Thumbs.db
+
+# Dependency management files (if not using pip freeze)
+# Pipfile
+# Pipfile.lock
+# poetry.lock
+# pyproject.toml
+
+# Alembic (if used, uncomment and adjust)
+# alembic/versions/*.py
+# !alembic/versions/__init__.py
+# !alembic/versions/.gitkeep

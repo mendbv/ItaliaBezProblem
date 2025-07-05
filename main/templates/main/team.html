@@ -1,0 +1,39 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block content %}
+    <section class="page-hero" style="background-image: url('{% static 'img/team-hero.jpg' %}');">
+        <div class="hero-overlay">
+            <h1>{% translate "Meet Our Team" %}</h1>
+            <p>{% translate "Dedicated professionals ready to assist you." %}</p>
+        </div>
+    </section>
+
+    <section class="team-section animate-on-scroll">
+        <div class="container">
+            <h3>{% translate "Our Experts" %}</h3>
+            <div class="team-grid">
+                {% for member in team_members %}
+                <div class="team-member-card animate-on-scroll">
+                    {% if member.photo %}
+                        <img src="{{ member.photo.url }}" alt="{{ member.full_name }}" class="member-photo">
+                    {% else %}
+                        <img src="{% static 'img/default-avatar.png' %}" alt="{% translate 'Default Avatar' %}" class="member-photo">
+                    {% endif %}
+                    <h4>{{ member.full_name }}</h4>
+                    <p class="position">{{ member.position }}</p>
+                    {% if member.experience %}
+                        <p class="experience">{{ member.experience }}</p>
+                    {% endif %}
+                    {% if member.linkedin_profile %}
+                        <a href="{{ member.linkedin_profile }}" target="_blank" aria-label="LinkedIn Profile"><i class="fab fa-linkedin"></i></a>
+                    {% endif %}
+                </div>
+                {% empty %}
+                <p>{% translate "No team members listed at the moment." %}</p>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+{% endblock %}

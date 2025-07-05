@@ -1,0 +1,41 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block content %}
+    <section class="page-hero" style="background-image: url('{% static 'img/about-us-hero.jpg' %}');">
+        <div class="hero-overlay">
+            <h1>{% translate "About Italia Bez Problem" %}</h1>
+            <p>{% translate "Your reliable partner for solutions in Italy." %}</p>
+        </div>
+    </section>
+
+    <section class="about-us-content animate-on-scroll">
+        <div class="container content-block">
+            <h3 class="section-title">{% translate "Our Story & Values" %}</h3>
+            {% if company_info.about_us_full %}
+                <p>{{ company_info.about_us_full }}</p>
+            {% else %}
+                <p>{% translate "Detailed company information will be available soon." %}</p>
+            {% endif %}
+
+            <div class="values-grid">
+                <div class="value-item animate-on-scroll">
+                    <i class="fas fa-handshake"></i>
+                    <h4>{% translate "Trust & Reliability" %}</h4>
+                    <p>{% translate "We build lasting relationships based on honesty and consistent results." %}</p>
+                </div>
+                <div class="value-item animate-on-scroll">
+                    <i class="fas fa-lightbulb"></i>
+                    <h4>{% translate "Innovative Solutions" %}</h4>
+                    <p>{% translate "We constantly seek new approaches to solve complex challenges." %}</p>
+                </div>
+                <div class="value-item animate-on-scroll">
+                    <i class="fas fa-globe-europe"></i>
+                    <h4>{% translate "Local Expertise, Global Reach" %}</h4>
+                    <p>{% translate "Deep understanding of the Italian market with an international perspective." %}</p>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
