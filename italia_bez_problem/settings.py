@@ -5,19 +5,23 @@ Django settings for italia_bez_problem project.
 import os
 from pathlib import Path
 import dj_database_url
+from dotenv import load_dotenv
+
+load_dotenv()
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-your-super-secret-key-for-development-only')
+SECRET_KEY = os.environ['SECRET_KEY']
 
 DEBUG = os.environ.get('DEBUG', 'True') == 'True'
 
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 if not DEBUG:
+    # IMPORTANT: Replace with your actual domain(s) and Droplet's IP address for production
     ALLOWED_HOSTS += [
         'italiabezproblem.com',
         'www.italiabezproblem.com',
-        'your_droplet_ip_address', # Replace with your Droplet's IP address
+        'your_droplet_ip_address',
     ]
 
 INSTALLED_APPS = [
@@ -68,7 +72,7 @@ WSGI_APPLICATION = 'italia_bez_problem.wsgi.application'
 
 DATABASES = {
     'default': dj_database_url.config(
-        default='postgres://user:password@db:5432/italia_bez_problem_db',
+        default='postgres://user:password@db:5432/italia_bez_problem_db', # Default for Docker Compose or local PostgreSQL
         conn_max_age=600
     )
 }
@@ -115,8 +119,8 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER', 'italiabezproblem.contacts@gmail.com')
-EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD', 'ctnj vapl mbvp yipq')
+EMAIL_HOST_USER = os.environ['EMAIL_HOST_USER']
+EMAIL_HOST_PASSWORD = os.environ['EMAIL_HOST_PASSWORD']
 DEFAULT_FROM_EMAIL = os.environ.get('DEFAULT_FROM_EMAIL', 'italiabezproblem.contacts@gmail.com')
 SERVER_EMAIL = os.environ.get('SERVER_EMAIL', 'marselcom379@gmail.com')
 
