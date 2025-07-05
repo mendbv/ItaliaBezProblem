@@ -17,7 +17,6 @@ DEBUG = os.environ.get('DEBUG', 'True') == 'True'
 
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 if not DEBUG:
-    # IMPORTANT: Replace with your actual domain(s) and Droplet's IP address for production
     ALLOWED_HOSTS += [
         'italiabezproblem.com',
         'www.italiabezproblem.com',
@@ -72,7 +71,7 @@ WSGI_APPLICATION = 'italia_bez_problem.wsgi.application'
 
 DATABASES = {
     'default': dj_database_url.config(
-        default='postgres://user:password@db:5432/italia_bez_problem_db', # Default for Docker Compose or local PostgreSQL
+        default='postgres://postgres:postgres@db:5432/italia_bez_problem_db',
         conn_max_age=600
     )
 }
@@ -96,6 +95,7 @@ USE_TZ = True
 LANGUAGES = [
     ('it', 'Italiano'),
     ('en', 'English'),
+    ('ru', 'Русский'),
 ]
 LOCALE_PATHS = [
     BASE_DIR / 'locale',
