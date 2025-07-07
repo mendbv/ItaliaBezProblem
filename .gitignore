@@ -19,9 +19,6 @@ staticfiles_collected/
 # Specific files within media to keep (if any, like .gitkeep)
 !media/.gitkeep
 
-# Translation files
-*.mo
-
 # Environment variables
 .env
 .env.docker
