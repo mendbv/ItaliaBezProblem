@@ -13,17 +13,17 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.environ['SECRET_KEY']
 
-DEBUG = os.environ.get('DEBUG', 'True') == 'True'
+# Ensure DEBUG is False in production
+DEBUG = os.environ.get('DEBUG', 'False') == 'True' # Changed default to 'False'
 
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 if not DEBUG:
     ALLOWED_HOSTS += [
         'italiabezproblem.com',
         'www.italiabezproblem.com',
-        'your_droplet_ip_address',
-        'https://italiabezproblem-ey9pg.ondigitalocean.app/',
-        'italiabezproblem-ey9pg.ondigitalocean.app',
+        'italiabezproblem-ey9pg.ondigitalocean.app', # Removed https://
         'www.italiabezproblem-ey9pg.ondigitalocean.app',
+        # Add any other App Platform domains if they exist, but without http/https
     ]
 
 INSTALLED_APPS = [
@@ -74,15 +74,19 @@ WSGI_APPLICATION = 'italia_bez_problem.wsgi.application'
 
 DATABASES = {
     'default': dj_database_url.config(
-        default='postgres://postgres:postgres@db:5432/italia_bez_problem_db',
+        # For DigitalOcean App Platform, DATABASE_URL is provided as an environment variable.
+        # No need for a 'default' here if you're using their managed DB.
+        # If you have an external DB, ensure DATABASE_URL env var is set on App Platform.
         conn_max_age=600
     )
 }
-if 'DATABASE_URL' not in os.environ:
+# This block is for local SQLite fallback if DATABASE_URL is not set.
+if 'DATABASE_URL' not in os.environ and DEBUG: # Only use SQLite fallback if DEBUG is True
     DATABASES['default'] = {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
+
 
 AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',},
