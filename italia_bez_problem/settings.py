@@ -13,19 +13,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.environ['SECRET_KEY']
 
-# Ensure DEBUG is False in production
-DEBUG = os.environ.get('DEBUG', 'False') == 'True' # Changed default to 'False'
+DEBUG = os.environ.get('DEBUG')
 
-# ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 if not DEBUG:
     ALLOWED_HOSTS += [
         'italiabezproblem.com',
         'www.italiabezproblem.com',
-        'italiabezproblem-ey9pg.ondigitalocean.app', # Removed https://
-        'www.italiabezproblem-ey9pg.ondigitalocean.app',
-        # Add any other App Platform domains if they exist, but without http/https
-    ]
+        'italiabezproblem-ey9pg.ondigitalocean.app',
+        'www.italiabezproblem-ey9pg.ondigitalocean.app']
 
 INSTALLED_APPS = [
     'modeltranslation',
