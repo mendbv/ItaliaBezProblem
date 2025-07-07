@@ -15,13 +15,22 @@ SECRET_KEY = os.environ['SECRET_KEY']
 
 DEBUG = os.environ.get('DEBUG')
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
-if not DEBUG:
-    ALLOWED_HOSTS += [
-        'italiabezproblem.com',
-        'www.italiabezproblem.com',
-        'italiabezproblem-ey9pg.ondigitalocean.app',
-        'www.italiabezproblem-ey9pg.ondigitalocean.app']
+ALLOWED_HOSTS = [
+    'italiabezproblem.com',
+    'www.italiabezproblem.com',
+    'italiabezproblem-ey9pg.ondigitalocean.app',
+    'www.italiabezproblem-ey9pg.ondigitalocean.app',
+    '127.0.0.1',
+    'localhost',
+]
+
+# ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
+# if not DEBUG:
+#     ALLOWED_HOSTS += [
+#         'italiabezproblem.com',
+#         'www.italiabezproblem.com',
+#         'italiabezproblem-ey9pg.ondigitalocean.app',
+#         'www.italiabezproblem-ey9pg.ondigitalocean.app']
 
 INSTALLED_APPS = [
     'modeltranslation',
