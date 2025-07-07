@@ -16,7 +16,8 @@ SECRET_KEY = os.environ['SECRET_KEY']
 # Ensure DEBUG is False in production
 DEBUG = os.environ.get('DEBUG', 'False') == 'True' # Changed default to 'False'
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
+# ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ['*']
 if not DEBUG:
     ALLOWED_HOSTS += [
         'italiabezproblem.com',
