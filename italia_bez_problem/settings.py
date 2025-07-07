@@ -21,6 +21,9 @@ if not DEBUG:
         'italiabezproblem.com',
         'www.italiabezproblem.com',
         'your_droplet_ip_address',
+        'https://italiabezproblem-ey9pg.ondigitalocean.app/',
+        'italiabezproblem-ey9pg.ondigitalocean.app',
+        'www.italiabezproblem-ey9pg.ondigitalocean.app',
     ]
 
 INSTALLED_APPS = [
