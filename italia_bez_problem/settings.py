@@ -121,7 +121,7 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = os.environ['EMAIL_HOST_USER']
 EMAIL_HOST_PASSWORD = os.environ['EMAIL_HOST_PASSWORD']
-DEFAULT_FROM_EMAIL = os.environ.get('DEFAULT_FROM_EMAIL', 'italiabezproblem.contacts@gmail.com')
+DEFAULT_FROM_EMAIL = os.environ.get('DEFAULT_FROM_EMAIL', 'info@italiabezproblem.com')
 SERVER_EMAIL = os.environ.get('SERVER_EMAIL', 'marselcom379@gmail.com')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
