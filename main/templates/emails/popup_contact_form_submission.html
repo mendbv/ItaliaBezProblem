@@ -1,4 +1,3 @@
-<!-- main/templates/emails/popup_contact_form_submission.html -->
 <!DOCTYPE html>
 <html lang="it">
 <head>
@@ -89,8 +88,7 @@
 <body>
     <div class="container">
         <div class="header-section">
-            <!-- Replace with the actual URL of your logo -->
-            <img src="https://placehold.co/150x50/008C45/FFFFFF?text=Logo" alt="Italia Bez Problem Logo">
+            <img src="{% static 'img/logo_full.png' %}" alt="Italia Bez Problem Logo">
             <h2>Nuova richiesta dal popup del sito</h2>
         </div>
         <p><strong>Nome:</strong> {{ name }}</p>

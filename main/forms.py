@@ -24,8 +24,6 @@ class ContactPopupForm(forms.Form):
         cleaned_data = super().clean()
         email = cleaned_data.get('email')
         phone = cleaned_data.get('phone')
-
-        # Проверяем, что предоставлен либо email, либо телефон
         if not email and not phone:
             raise ValidationError(
                 _("Please provide either your email or phone number."),

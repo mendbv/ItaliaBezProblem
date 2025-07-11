@@ -7,7 +7,6 @@
     <title>Nuova richiesta di contatto</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
     <style>
-        /* CSS variables matching your main.css */
         :root {
             --color-green: #008C45;
             --color-white: #F4F5F0;
@@ -38,7 +37,7 @@
             padding: 30px;
             border-radius: var(--border-radius);
             box-shadow: var(--box-shadow);
-            border-top: 5px solid var(--color-green); /* Green accent bar */
+            border-top: 5px solid var(--color-green);
         }
         .header-section {
             text-align: center;
@@ -89,8 +88,7 @@
 <body>
     <div class="container">
         <div class="header-section">
-            <!-- Replace with the actual URL of your logo -->
-            <img src="https://placehold.co/150x50/008C45/FFFFFF?text=Logo" alt="Italia Bez Problem Logo">
+            <img src="{% static 'img/logo_full.png' %}" alt="Italia Bez Problem Logo">
             <h2>Nuova richiesta di contatto dal sito Italia Bez Problem</h2>
         </div>
         <p><strong>Nome:</strong> {{ name }}</p>
