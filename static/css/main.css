@@ -325,7 +325,7 @@ section p {
     .hamburger-menu {
         display: block;
         order: 3;
-        margin-left: auto;
+        margin-left: 15px;
     }
 }
 
