@@ -1,6 +1,4 @@
 /* static/css/main.css */
-
-/* --- Variables --- */
 :root {
     --color-green: #008C45;
     --color-white: #F4F5F0;
@@ -9,11 +7,9 @@
     --color-light-grey: #f9f9f9;
     --color-text-light: #666;
     --color-accent-blue: #007bff;
-
     --font-primary: 'Inter', sans-serif;
     --font-heading: 'Inter', sans-serif;
-
-    --header-height: 80px; /* Убедитесь, что это соответствует фактической высоте хедера */
+    --header-height: 80px;
     --transition-speed: 0.3s;
     --border-radius: 8px;
     --box-shadow: 0 4px 15px rgba(0,0,0,0.1);
@@ -21,10 +17,10 @@
     --section-padding: 60px 0;
 }
 
-/* --- Base Styles --- */
 html, body {
-    height: 100%; /* Гарантируем, что html и body занимают всю высоту viewport */
+    height: 100%;
     margin: 0;
+    overflow-x: hidden;
 }
 
 body {
@@ -34,16 +30,12 @@ body {
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-
-    /* Sticky Footer: Располагаем элементы в колонку */
     display: flex;
     flex-direction: column;
 }
 
-/* Sticky Footer: Позволяет секции main растягиваться */
 main {
     flex: 1;
-    /* Учитываем высоту хедера, чтобы контент не перекрывался */
     padding-top: var(--header-height);
 }
 
@@ -55,7 +47,7 @@ main {
 
 @media (max-width: 768px) {
     .container {
-        padding: 0 15px;
+        padding: 0 10px;
     }
 }
 
@@ -63,7 +55,7 @@ h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-heading);
     margin-top: 0;
     margin-bottom: 0.5em;
-    color: var(--color-dark-grey); /* Черный текст по умолчанию для заголовков */
+    color: var(--color-dark-grey);
 }
 
 h1 { font-size: 3em; }
@@ -73,7 +65,7 @@ h4 { font-size: 1.5em; }
 
 p {
     margin-bottom: 1em;
-    text-align: left; /* По умолчанию параграфы выравниваем по левому краю */
+    text-align: left;
 }
 
 a {
@@ -103,7 +95,7 @@ a:hover {
 }
 
 .btn:hover {
-    background-color: #a81c22; /* Darker red */
+    background-color: #a81c22;
     transform: translateY(-2px);
 }
 .btn:active {
@@ -117,7 +109,7 @@ a:hover {
     left: -100%;
     width: 100%;
     height: 100%;
-    background: rgba(255, 255, 255, 0.2); /* Using RGBA directly for white */
+    background: rgba(255, 255, 255, 0.2);
     transition: left 0.4s ease-in-out;
     z-index: -1;
     transform: skewX(-20deg);
@@ -132,19 +124,24 @@ section {
     overflow: hidden;
 }
 
+@media (max-width: 768px) {
+    section {
+        padding: 40px 0;
+    }
+}
+
 section:nth-of-type(odd) {
     background-color: var(--color-light-grey);
 }
 
-/* Общие стили для заголовков секций */
 section h3 {
     font-size: 2.5em;
     margin-bottom: 40px;
     color: var(--color-green);
     position: relative;
     display: inline-block;
-    text-align: center; /* Центрируем заголовки секций */
-    width: 100%; /* Убедимся, что занимает всю ширину для центрирования */
+    text-align: center;
+    width: 100%;
 }
 
 section h3::after {
@@ -166,15 +163,13 @@ section h3::after {
     }
 }
 
-/* Общие стили для параграфов внутри секций */
 section p {
     max-width: 800px;
     margin: 0 auto 20px auto;
     color: var(--color-text-light);
-    text-align: center; /* Центрируем параграфы в общих секциях по умолчанию */
+    text-align: center;
 }
 
-/* --- Header --- */
 .header {
     background-color: var(--color-white);
     padding: 15px 0;
@@ -190,15 +185,16 @@ section p {
 
 .header-content {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-between; /* Распределяем элементы по краям */
     align-items: center;
     width: 100%;
+    flex-wrap: nowrap;
 }
 
 @media (max-width: 768px) {
     .header-content {
-        flex-wrap: wrap;
-        justify-content: center;
+        justify-content: flex-start; /* Выравниваем по левому краю для начала */
+        gap: 10px; /* Добавляем небольшой зазор между элементами */
     }
 }
 
@@ -208,9 +204,14 @@ section p {
 
 @media (max-width: 768px) {
     .logo {
-        width: 100%;
-        text-align: center;
-        margin-bottom: 10px;
+        width: auto;
+        text-align: left;
+        margin-bottom: 0;
+        order: 1;
+    }
+    .logo img {
+        height: 50px;
+        margin: 0; /* Убираем auto margin, чтобы не центрировало */
     }
 }
 
@@ -232,8 +233,9 @@ section p {
 
 @media (max-width: 768px) {
     .main-nav {
-        width: 100%;
+        width: auto;
         justify-content: flex-end;
+        order: 3;
     }
 }
 
@@ -322,7 +324,8 @@ section p {
 @media (max-width: 768px) {
     .hamburger-menu {
         display: block;
-        order: 1;
+        order: 3;
+        margin-left: auto;
     }
 }
 
@@ -345,7 +348,6 @@ section p {
 .hamburger-menu.open .bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
 
 
-/* --- Language Switcher --- */
 .language-switcher {
     position: relative;
     display: inline-block;
@@ -354,8 +356,9 @@ section p {
 
 @media (max-width: 768px) {
     .language-switcher {
-        margin: 15px auto;
-        width: fit-content;
+        margin-left: 0; /* Убираем отступ, чтобы был у самого края */
+        margin-right: auto; /* Отталкиваем вправо, чтобы он был слева от гамбургера */
+        order: 2;
     }
 }
 
@@ -371,7 +374,7 @@ section p {
 }
 
 .language-switcher .dropbtn:hover {
-    background-color: #007a3b; /* Darker green */
+    background-color: #007a3b;
 }
 
 .language-switcher .dropbtn i {
@@ -388,6 +391,9 @@ section p {
     right: 0;
     border-radius: var(--border-radius);
     overflow: hidden;
+    transform: translateY(-100%);
+    opacity: 0;
+    transition: transform 0.4s ease-out, opacity 0.4s ease-out;
 }
 
 .language-switcher .dropdown-content a {
@@ -407,7 +413,6 @@ section p {
     display: block;
 }
 
-/* --- Hero Section --- */
 .hero-section {
     position: relative;
     width: 100%;
@@ -417,7 +422,7 @@ section p {
     justify-content: center;
     overflow: hidden;
     color: var(--color-white);
-    text-align: center; /* Центрируем содержимое Hero-секции */
+    text-align: center;
 }
 
 .hero-section .homepage-video, .hero-section .hero-image {
@@ -436,81 +441,90 @@ section p {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.6); /* Темный оверлей для читаемости */
+    background-color: rgba(0, 0, 0, 0.6);
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     z-index: 2;
     padding: 20px;
-    backdrop-filter: blur(3px); /* Небольшое размытие фона за текстом (современные браузеры) */
+    backdrop-filter: blur(3px);
 }
 
-/* Контейнер для текста на Hero-секции */
 .hero-text-container {
-    background-color: rgba(128, 128, 128, 0.7); /* Серо-прозрачный фон */
-    border-radius: var(--border-radius); /* Закругленные углы */
-    padding: 20px 30px; /* Уменьшенные отступы */
-    max-width: 600px; /* Уменьшенная максимальная ширина */
-    margin: 0 auto; /* Центрируем */
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); /* Небольшая тень для объема */
+    background-color: rgba(128, 128, 128, 0.7);
+    border-radius: var(--border-radius);
+    padding: 20px 30px;
+    max-width: 600px;
+    margin: 0 auto;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
     display: flex;
     flex-direction: column;
-    align-items: center; /* Центрируем содержимое по горизонтали */
-    backdrop-filter: blur(8px); /* Увеличим размытие фона за блоком */
-    border: 2px solid rgba(255, 255, 255, 0.5); /* Добавим тонкую белую рамку */
+    align-items: center;
+    backdrop-filter: blur(8px);
+    border: 2px solid rgba(255, 255, 255, 0.5);
 }
 
-/* Стили для контейнера логотипа внутри Hero-секции */
+@media (max-width: 768px) {
+    .hero-text-container {
+        padding: 15px 20px;
+    }
+}
+
 .hero-logo-container {
-    margin-bottom: 15px; /* Отступ между логотипом и заголовком */
+    margin-bottom: 15px;
 }
 
 .hero-logo-container img {
-    height: 80px; /* Уменьшенная высота логотипа */
+    height: 80px;
     width: auto;
     display: block;
 }
 
+@media (max-width: 768px) {
+    .hero-logo-container img {
+        height: 60px;
+    }
+}
+
 .hero-section h1 {
-    font-size: 4em; /* Немного уменьшим шрифт для компактности */
-    margin-bottom: 10px; /* Уменьшим отступ */
-    color: #222; /* Темно-серый цвет */
-    text-shadow: none; /* Убираем тень */
+    font-size: 4em;
+    margin-bottom: 10px;
+    color: #222;
+    text-shadow: none;
     line-height: 1.1;
-    text-align: center; /* Центрируем заголовок */
+    text-align: center;
 }
 
 @media (max-width: 768px) {
     .hero-section h1 {
-        font-size: 2.2em; /* Адаптивный размер */
+        font-size: 2.2em;
     }
 }
 
 .hero-section h2 {
-    font-size: 2em; /* Немного уменьшим шрифт для компактности */
-    margin-bottom: 20px; /* Уменьшим отступ */
-    color: #222; /* Темно-серый цвет */
-    text-shadow: none; /* Убираем тень */
-    text-align: center; /* Центрируем слоган */
+    font-size: 2em;
+    margin-bottom: 20px;
+    color: #222;
+    text-shadow: none;
+    text-align: center;
 }
 
 @media (max-width: 768px) {
     .hero-section h2 {
-        font-size: 1.3em; /* Адаптивный размер */
+        font-size: 1.3em;
     }
 }
 
-/* Стили для текста "Over 5000+ satisfied clients" */
 .hero-section .clients-count-text {
-    font-size: 1.6em; /* Немного уменьшим размер */
+    font-size: 1.6em;
     font-weight: 900;
-    color: var(--color-white); /* Белый цвет для контраста с красным фоном */
-    background-color: var(--color-red); /* Красный фон */
-    padding: 8px 18px; /* Уменьшенные отступы */
+    color: var(--color-white);
+    background-color: var(--color-red);
+    padding: 8px 18px;
     border-radius: var(--border-radius);
-    margin-top: 15px; /* УМЕНЬШЕННЫЙ ОТСТУП СВЕРХУ */
-    text-shadow: 1px 1px 3px rgba(0,0,0,0.5); /* Тень для лучшей читаемости */
+    margin-top: 15px;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
     letter-spacing: 1px;
 }
 
@@ -521,7 +535,6 @@ section p {
     }
 }
 
-/* --- Page Hero --- */
 .page-hero {
     position: relative;
     width: 100%;
@@ -535,6 +548,12 @@ section p {
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+}
+
+@media (max-width: 768px) {
+    .page-hero {
+        height: 30vh;
+    }
 }
 
 .page-hero .hero-overlay {
@@ -567,7 +586,7 @@ section p {
 
 .page-hero p {
     font-size: 1.2em;
-    color: rgba(255, 255, 255, 0.9); /* Using RGBA directly for white */
+    color: rgba(255, 255, 255, 0.9);
     max-width: 600px;
     margin: 0 auto;
 }
@@ -578,7 +597,6 @@ section p {
     }
 }
 
-/* --- Service Cards --- */
 .service-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -586,13 +604,25 @@ section p {
     margin-top: 40px;
 }
 
+@media (max-width: 600px) {
+    .service-grid {
+        gap: 20px;
+    }
+}
+
 .service-card {
     background-color: var(--color-white);
     padding: 30px;
     border-radius: var(--border-radius);
     box-shadow: var(--box-shadow);
-    text-align: center; /* Выравнивание текста в карточке услуги по центру */
+    text-align: center;
     transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+}
+
+@media (max-width: 600px) {
+    .service-card {
+        padding: 20px;
+    }
 }
 
 .service-card:hover {
@@ -624,7 +654,7 @@ section p {
 .service-card p {
     color: var(--color-text-light);
     margin-bottom: 15px;
-    text-align: center; /* Выравнивание текста параграфа в карточке услуги по центру */
+    text-align: center;
 }
 
 .service-card .price {
@@ -635,12 +665,17 @@ section p {
     text-align: center;
 }
 
-/* --- Team Cards --- */
 .team-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 30px;
     margin-top: 40px;
+}
+
+@media (max-width: 600px) {
+    .team-grid {
+        gap: 20px;
+    }
 }
 
 .team-member-card {
@@ -650,6 +685,12 @@ section p {
     box-shadow: var(--box-shadow);
     text-align: center;
     transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+}
+
+@media (max-width: 600px) {
+    .team-member-card {
+        padding: 15px;
+    }
 }
 
 .team-member-card:hover {
@@ -687,7 +728,7 @@ section p {
     font-size: 0.95em;
     color: var(--color-dark-grey);
     margin-bottom: 15px;
-    text-align: center; /* Выравнивание по центру */
+    text-align: center;
 }
 
 .team-member-card .social-links {
@@ -707,7 +748,6 @@ section p {
     transform: scale(1.1);
 }
 
-/* --- Animations (basic CSS animations) --- */
 .animate-on-scroll {
     opacity: 0;
     transform: translateY(30px);
@@ -719,25 +759,20 @@ section p {
     transform: translateY(0);
 }
 
-/* --- About Us Page --- */
 .about-us-content {
-    /* Основной контейнер секции "About Us" */
-    text-align: center; /* Центрируем содержимое секции */
+    text-align: center;
 }
 
 .about-us-content .content-block {
-    /* Этот блок уже центрирован с помощью margin: 0 auto; в .container */
 }
 
 .about-us-content .section-title {
-    /* Этот заголовок уже центрирован через общие правила section h3 */
 }
 
 .about-us-content p {
-    /* Параграфы под заголовком "Our Story & Values" */
-    text-align: center; /* Центрируем этот параграф */
-    max-width: 800px; /* Ограничиваем ширину для лучшей читаемости */
-    margin: 0 auto 20px auto; /* Центрируем сам параграф */
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto 20px auto;
 }
 
 .values-grid {
@@ -745,9 +780,18 @@ section p {
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 30px;
     margin-top: 40px;
-    /* Центрируем саму сетку, если она не занимает всю ширину */
-    justify-items: center; /* Центрирует элементы внутри grid-контейнера */
-    align-items: start; /* Выравнивает элементы по верху */
+    justify-items: center;
+    align-items: start;
+}
+
+@media (max-width: 600px) {
+    .values-grid {
+        gap: 20px;
+    }
+    .value-item {
+        padding: 20px;
+        min-height: auto;
+    }
 }
 
 .value-item {
@@ -755,15 +799,15 @@ section p {
     padding: 30px;
     border-radius: var(--border-radius);
     box-shadow: var(--box-shadow);
-    text-align: center; /* Центрируем все содержимое внутри value-item */
+    text-align: center;
     transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
-    max-width: 350px; /* Ограничиваем ширину карточки для лучшего центрирования */
-    width: 100%; /* Убежимся, что она занимает доступную ширину */
-    display: flex; /* Используем flexbox для выравнивания содержимого */
+    max-width: 350px;
+    width: 100%;
+    display: flex;
     flex-direction: column;
-    align-items: center; /* Центрируем содержимое по горизонтали */
-    justify-content: flex-start; /* Выравниваем по верху */
-    min-height: 220px; /* Минимальная высота для единообразия */
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 220px;
 }
 
 .value-item:hover {
@@ -775,7 +819,8 @@ section p {
     font-size: 3em;
     color: var(--color-green);
     margin-bottom: 20px;
-    display: block; /* Важно: для text-align: center; родителя */
+    display: block;
+    text-align: center;
 }
 
 .value-item h4 {
@@ -787,28 +832,34 @@ section p {
 .value-item p {
     color: var(--color-text-light);
     margin-bottom: 15px;
-    text-align: center; /* ИСПРАВЛЕНО: Центрируем текст в параграфе */
+    text-align: center;
 }
 
-/* --- Mission and Vision Page Styles --- */
 .mission-vision-content {
-    /* Удаляем старые стили, которые центрировали mv-item, так как теперь используем сетку */
-    text-align: center; /* Центрируем заголовок секции и подзаголовок */
+    text-align: center;
 }
 
 .mission-vision-grid {
     display: grid;
-    grid-template-columns: 1fr; /* Одна колонка на мобильных */
+    grid-template-columns: 1fr;
     gap: 30px;
     margin-top: 40px;
-    justify-items: center; /* Центрирует элементы внутри grid-контейнера */
-    /* Убираем align-items: start; если хотим, чтобы карточки были одинаковой высоты */
-    /* align-items: stretch; */ /* Можно использовать для одинаковой высоты */
+    justify-items: center;
 }
 
 @media (min-width: 768px) {
     .mission-vision-grid {
-        grid-template-columns: repeat(2, 1fr); /* Две колонки на планшетах и выше */
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .mission-vision-grid {
+        gap: 20px;
+    }
+    .mv-card {
+        padding: 20px;
+        min-height: auto;
     }
 }
 
@@ -819,13 +870,13 @@ section p {
     box-shadow: var(--box-shadow);
     text-align: center;
     transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
-    max-width: 500px; /* Ограничим максимальную ширину карточки, чтобы не растягивалась слишком сильно */
-    width: 100%; /* Убежимся, что она занимает доступную ширину */
-    display: flex; /* Используем flexbox для выравнивания содержимого */
+    max-width: 500px;
+    width: 100%;
+    display: flex;
     flex-direction: column;
-    align-items: center; /* Центрируем содержимое по горизонтали */
-    justify-content: flex-start; /* Выравниваем по верху */
-    min-height: 200px; /* Минимальная высота для единообразия */
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 200px;
 }
 
 .mv-card:hover {
@@ -834,10 +885,10 @@ section p {
 }
 
 .mv-card i {
-    font-size: 3.5em; /* Размер иконки */
-    color: var(--color-green); /* Цвет иконки */
+    font-size: 3.5em;
+    color: var(--color-green);
     margin-bottom: 15px;
-    background-color: rgba(0, 140, 69, 0.1); /* Легкий фон для иконки */
+    background-color: rgba(0, 140, 69, 0.1);
     border-radius: 50%;
     width: 70px;
     height: 70px;
@@ -846,33 +897,40 @@ section p {
     justify-content: center;
 }
 
-.mv-card h3 { /* ИЗМЕНЕНО: теперь h3 внутри карточки */
-    font-size: 2em; /* Размер заголовка */
-    color: var(--color-red); /* Цвет заголовка */
+.mv-card h3 {
+    font-size: 2em;
+    color: var(--color-red);
     margin-bottom: 15px;
-    text-align: center; /* Центрируем заголовок внутри карточки */
-    width: 100%; /* Занимает всю ширину карточки */
+    text-align: center;
+    width: 100%;
 }
 
-/* Убираем подчеркивание у заголовков внутри карточек, если оно есть */
 .mv-card h3::after {
     display: none;
 }
 
 .mv-card p {
-    font-size: 1em; /* Размер текста */
+    font-size: 1em;
     color: var(--color-text-light);
     line-height: 1.6;
-    text-align: center; /* Центрируем текст внутри карточки */
+    text-align: center;
 }
 
-/* --- Contact Section --- */
 .contact-section .contact-info-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 30px;
     margin-top: 40px;
-    /* text-align: left; - Удаляем, чтобы управлять выравниванием внутри */
+}
+
+@media (max-width: 600px) {
+    .contact-section .contact-info-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    .contact-section .contact-info-grid .contact-item {
+        padding: 20px;
+    }
 }
 
 .contact-section .contact-info-grid .contact-item {
@@ -880,7 +938,7 @@ section p {
     padding: 25px;
     border-radius: var(--border-radius);
     box-shadow: var(--box-shadow);
-    text-align: center; /* Центрируем содержимое каждой карточки */
+    text-align: center;
     transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
 }
 
@@ -901,7 +959,7 @@ section p {
 .contact-section .contact-info-grid .contact-item p {
     margin: 0;
     color: var(--color-text-light);
-    text-align: center; /* Центрируем текст внутри карточки контакта */
+    text-align: center;
 }
 .contact-section .contact-info-grid .contact-item a {
     display: block;
@@ -914,7 +972,7 @@ section p {
 
 .contact-section .social-links {
     margin-top: 40px;
-    text-align: center; /* Центрируем социальные иконки */
+    text-align: center;
 }
 .contact-section .social-links a {
     display: inline-block;
@@ -929,7 +987,6 @@ section p {
     transform: scale(1.1);
 }
 
-/* Styles for Contact Form */
 .contact-form-container {
     margin-top: 60px;
     background-color: var(--color-white);
@@ -939,7 +996,25 @@ section p {
     max-width: 600px;
     margin-left: auto;
     margin-right: auto;
-    text-align: left; /* Выравнивание текста внутри контейнера формы */
+    text-align: left;
+}
+
+@media (max-width: 600px) {
+    .contact-form-container {
+        padding: 25px;
+        margin-top: 30px;
+    }
+    .contact-form-container h4 {
+        font-size: 1.6em;
+        margin-bottom: 20px;
+    }
+    .contact-form input, .contact-form textarea {
+        padding: 10px;
+        margin-bottom: 15px;
+    }
+    .contact-form .btn {
+        padding: 12px;
+    }
 }
 
 .contact-form-container h4 {
@@ -964,7 +1039,7 @@ section p {
     margin-bottom: 20px;
     border: 1px solid #ddd;
     border-radius: 4px;
-    box-sizing: border-box; /* Учитываем padding в ширине */
+    box-sizing: border-box;
     font-family: var(--font-primary);
     font-size: 1em;
     transition: border-color 0.3s ease;
@@ -979,7 +1054,7 @@ section p {
 
 .contact-form textarea {
     min-height: 120px;
-    resize: vertical; /* Разрешить изменение размера по вертикали */
+    resize: vertical;
 }
 
 .contact-form .btn {
@@ -988,7 +1063,6 @@ section p {
     font-size: 1.1em;
 }
 
-/* Styles for Django messages */
 .messages {
     list-style: none;
     padding: 0;
@@ -1027,26 +1101,38 @@ section p {
     border: 1px solid #bee5eb;
 }
 
-/* --- Footer --- */
 .footer {
-    background-color: var(--color-dark-grey); /* Темный фон */
-    color: var(--color-white); /* Белый текст */
+    background-color: var(--color-dark-grey);
+    color: var(--color-white);
     padding: 40px 0;
-    text-align: center; /* Центрируем весь текст футера */
+    text-align: center;
     margin-top: 60px;
+}
+
+@media (max-width: 768px) {
+    .footer {
+        padding: 30px 0;
+        margin-top: 40px;
+    }
+    .footer .footer-contacts p {
+        font-size: 0.9em;
+    }
+    .footer .footer-social a {
+        font-size: 1.5em;
+    }
 }
 
 .footer .container {
     display: flex;
     flex-direction: column;
-    align-items: center; /* Центрируем элементы по горизонтали */
+    align-items: center;
     justify-content: center;
 }
 
 .footer p {
     margin-bottom: 10px;
     font-size: 0.9em;
-    color: rgba(255, 255, 255, 0.8); /* Белый текст с небольшой прозрачностью */
+    color: rgba(255, 255, 255, 0.8);
 }
 
 .footer .footer-contacts {
@@ -1058,7 +1144,7 @@ section p {
     font-size: 1em;
     display: flex;
     align-items: center;
-    justify-content: center; /* Центрируем содержимое каждой строки контактов */
+    justify-content: center;
 }
 
 .footer .footer-contacts p i {
@@ -1091,43 +1177,53 @@ section p {
     transform: scale(1.1);
 }
 
-/* Styles for specific sections on index.html to center buttons */
 .about-company {
-    text-align: center; /* Центрирует кнопку "Learn More" */
+    text-align: center;
 }
 
 .services-overview {
-    text-align: center; /* Центрирует кнопку "View All Services" */
+    text-align: center;
 }
 
-/* New styles for the simplified contact call to action section */
 .contact-call-to-action {
-    background-color: var(--color-white); /* ИЗМЕНЕНО: Фон теперь белый */
-    color: var(--color-dark-grey); /* ИЗМЕНЕНО: Цвет текста теперь темно-серый */
-    padding: 80px 0; /* Увеличим отступы для большего визуального веса */
-    text-align: center; /* Центрируем все содержимое */
+    background-color: var(--color-white);
+    color: var(--color-dark-grey);
+    padding: 80px 0;
+    text-align: center;
+}
+
+@media (max-width: 768px) {
+    .contact-call-to-action {
+        padding: 50px 0;
+    }
+    .contact-call-to-action p {
+        font-size: 1em;
+    }
+    .contact-call-to-action .btn {
+        padding: 12px 25px;
+        font-size: 1.1em;
+    }
 }
 
 .contact-call-to-action h3 {
-    color: var(--color-green); /* ИЗМЕНЕНО: Заголовок теперь зеленый */
+    color: var(--color-green);
     margin-bottom: 20px;
 }
 
-/* Убираем подчеркивание у заголовка в этой секции, если оно есть */
 .contact-call-to-action h3::after {
     display: none;
 }
 
 .contact-call-to-action p {
     max-width: 700px;
-    margin: 0 auto 30px auto; /* Центрируем параграф и добавляем отступ снизу */
+    margin: 0 auto 30px auto;
     font-size: 1.2em;
     line-height: 1.5;
-    color: var(--color-text-light); /* ИЗМЕНЕНО: Цвет текста параграфа */
+    color: var(--color-text-light);
 }
 
 .contact-call-to-action .btn {
-    background-color: var(--color-red); /* ИЗМЕНЕНО: Кнопка теперь красная */
+    background-color: var(--color-red);
     color: var(--color-white);
     padding: 15px 35px;
     font-size: 1.2em;
@@ -1135,20 +1231,26 @@ section p {
 }
 
 .contact-call-to-action .btn:hover {
-    background-color: #a81c22; /* Более темный красный при наведении */
+    background-color: #a81c22;
 }
 
-/* --- New "Why Choose Us" section styles --- */
 .why-choose-us {
-    background-color: var(--color-white); /* Фон секции */
-    text-align: center; /* Центрируем содержимое секции */
+    background-color: var(--color-white);
+    text-align: center;
+}
+
+@media (max-width: 768px) {
+    .why-choose-us .section-subtitle {
+        font-size: 1em;
+        margin-bottom: 30px;
+    }
 }
 
 .why-choose-us .section-subtitle {
     font-size: 1.2em;
     color: var(--color-text-light);
-    margin-bottom: 50px; /* Отступ под подзаголовком */
-    display: block; /* Убедимся, что это блочный элемент для text-align */
+    margin-bottom: 50px;
+    display: block;
 }
 
 .facts-grid {
@@ -1156,8 +1258,23 @@ section p {
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 30px;
     margin-top: 40px;
-    justify-items: center; /* Центрирует элементы внутри grid-контейнера */
-    align-items: start; /* Выравнивает элементы по верху */
+}
+
+@media (max-width: 600px) {
+    .facts-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    .fact-item {
+        padding: 20px;
+        min-height: auto;
+    }
+    .fact-item h4 {
+        font-size: 1.8em;
+    }
+    .fact-item p {
+        font-size: 1em;
+    }
 }
 
 .fact-item {
@@ -1167,13 +1284,13 @@ section p {
     box-shadow: var(--box-shadow);
     text-align: center;
     transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
-    max-width: 350px; /* Ограничиваем ширину карточки */
-    width: 100%; /* Убежимся, что она занимает доступную ширину */
-    display: flex; /* Используем flexbox для выравнивания содержимого */
+    max-width: 350px;
+    width: 100%;
+    display: flex;
     flex-direction: column;
-    align-items: center; /* Центрируем содержимое по горизонтали */
-    justify-content: flex-start; /* Выравниваем по верху */
-    min-height: 220px; /* Минимальная высота для единообразия */
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 220px;
 }
 
 .fact-item:hover {
@@ -1182,10 +1299,10 @@ section p {
 }
 
 .fact-item i {
-    font-size: 3.5em; /* Размер иконки */
-    color: var(--color-green); /* Цвет иконки */
+    font-size: 3.5em;
+    color: var(--color-green);
     margin-bottom: 15px;
-    background-color: rgba(0, 140, 69, 0.1); /* Легкий фон для иконки */
+    background-color: rgba(0, 140, 69, 0.1);
     border-radius: 50%;
     width: 70px;
     height: 70px;
@@ -1195,40 +1312,55 @@ section p {
 }
 
 .fact-item h4 {
-    font-size: 2.2em; /* Размер основного числа/заголовка */
-    color: var(--color-red); /* Цвет числа/заголовка */
+    font-size: 2.2em;
+    color: var(--color-red);
     margin-bottom: 5px;
 }
 
 .fact-item p {
-    font-size: 1.1em; /* Размер краткого описания */
+    font-size: 1.1em;
     color: var(--color-dark-grey);
     font-weight: bold;
     margin-bottom: 10px;
 }
 
 .fact-item .fact-description {
-    font-size: 0.9em; /* Размер детального описания */
+    font-size: 0.9em;
     color: var(--color-text-light);
     line-height: 1.4;
 }
 
-/* --- Floating Contact Button with Dropdown --- */
 .contact-float-button {
     position: fixed;
     bottom: 20px;
     right: 20px;
     z-index: 9999;
-    /* Убираем flex-контейнер для родителя, чтобы дочерний dropdown позиционировался относительно него */
-    /* display: flex; */
-    /* flex-direction: column; */
-    /* align-items: flex-end; */
+}
+
+@media (max-width: 768px) {
+    .contact-float-button {
+        bottom: 15px;
+        right: 15px;
+    }
+    .main-contact-btn {
+        width: 50px;
+        height: 50px;
+        font-size: 2em;
+    }
+    .contact-dropdown-content {
+        min-width: 160px;
+        bottom: calc(100% + 8px);
+    }
+    .contact-dropdown-content a {
+        padding: 10px 14px;
+        font-size: 0.9em;
+    }
 }
 
 .main-contact-btn {
     width: 60px;
     height: 60px;
-    background-color: var(--color-green); /* Зеленый цвет для основной кнопки */
+    background-color: var(--color-green);
     color: white;
     border-radius: 50%;
     text-align: center;
@@ -1244,42 +1376,37 @@ section p {
 
 .main-contact-btn:hover {
     transform: scale(1.1);
-    background-color: #007a3b; /* Темнее зеленый при наведении */
+    background-color: #007a3b;
 }
 
 .contact-dropdown-content {
-    /* ИЗМЕНЕНО: Используем visibility и opacity для плавного появления/исчезновения */
-    visibility: hidden; /* Скрыто по умолчанию, но занимает место */
-    opacity: 0; /* Полностью прозрачно */
-    position: absolute; /* Позиционируем относительно родителя (.contact-float-button) */
-    bottom: calc(100% + 10px); /* Позиционируем над кнопкой + отступ */
-    right: 0; /* Выравниваем по правому краю кнопки */
-    flex-direction: column; /* Для вертикального расположения ссылок */
+    visibility: hidden;
+    opacity: 0;
+    position: absolute;
+    bottom: calc(100% + 10px);
+    right: 0;
+    flex-direction: column;
     background-color: var(--color-white);
     min-width: 180px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     border-radius: var(--border-radius);
     overflow: hidden;
-    /* Анимация: начинается немного ниже и полностью прозрачная */
     transform: translateY(10px);
-    
-    /* ИЗМЕНЕНО: Задержка для visibility, чтобы opacity успела отработать */
     transition: opacity 0.3s ease-out, transform 0.3s ease-out, visibility 0s linear 0.3s;
 }
 
-/* ИЗМЕНЕНО: При наведении на родительский контейнер */
 .contact-float-button:hover .contact-dropdown-content {
-    visibility: visible; /* Показываем */
-    opacity: 1; /* Делаем видимым */
-    transform: translateY(0); /* Возвращаем в исходное положение */
-    transition-delay: 0s; /* Убираем задержку при появлении */
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0s;
 }
 
 .contact-dropdown-content a {
     color: var(--color-dark-grey);
     padding: 12px 16px;
     text-decoration: none;
-    display: flex; /* Для выравнивания иконки и текста */
+    display: flex;
     align-items: center;
     text-align: left;
     transition: background-color 0.3s ease, color 0.3s ease;
@@ -1293,46 +1420,44 @@ section p {
 .contact-dropdown-content a i {
     margin-right: 10px;
     font-size: 1.2em;
-    color: var(--color-green); /* Иконки зеленые по умолчанию */
+    color: var(--color-green);
     transition: color 0.3s ease;
 }
 
 .contact-dropdown-content a:hover i {
-    color: var(--color-red); /* Иконки красные при наведении */
+    color: var(--color-red);
 }
 
-/* --- Modal (Popup) Styles --- */
 .modal {
-    display: none; /* Скрыто по умолчанию */
-    position: fixed; /* Оставаться на месте */
-    z-index: 10000; /* Сильно выше всего остального */
+    display: none;
+    position: fixed;
+    z-index: 10000;
     left: 0;
     top: 0;
-    width: 100%; /* Полная ширина */
-    height: 100%; /* Полная высота */
-    overflow: auto; /* Включить прокрутку, если контент слишком большой */
-    background-color: rgba(0, 0, 0, 0.7); /* Черный фон с прозрачностью */
-    display: flex; /* Используем flexbox для центрирования */
-    align-items: center; /* Центрируем по вертикали */
-    justify-content: center; /* Центрируем по горизонтали */
-    backdrop-filter: blur(5px); /* Размытие фона */
-    -webkit-backdrop-filter: blur(5px); /* Для Safari */
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
 }
 
 .modal-content {
     background-color: var(--color-white);
-    margin: auto; /* Центрирование в старой модели flexbox */
+    margin: auto;
     padding: 30px;
     border-radius: var(--border-radius);
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
     position: relative;
-    max-width: 500px; /* Максимальная ширина модального окна */
-    width: 90%; /* Адаптивная ширина */
-    animation: fadeInScale 0.3s ease-out; /* Анимация появления */
-    box-sizing: border-box; /* Учитываем padding в ширине */
+    max-width: 500px;
+    width: 90%;
+    animation: fadeInScale 0.3s ease-out;
+    box-sizing: border-box;
 }
 
-/* Анимация появления модального окна */
 @keyframes fadeInScale {
     from {
         opacity: 0;
@@ -1428,12 +1553,10 @@ section p {
     border: 1px solid #b2ebf2;
 }
 
-/* Prevent body scrolling when modal is open */
 body.modal-open {
     overflow: hidden;
 }
 
-/* Responsive adjustments for modal */
 @media (max-width: 600px) {
     .modal-content {
         padding: 20px;
