@@ -153,6 +153,3 @@ else:
     COMPRESS_ENABLED = True
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-
-WHITENOISE_MAX_AGE = 60 * 60 * 24 * 365
-WHITENOISE_AUTOREFRESH = False 
