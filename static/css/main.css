@@ -185,7 +185,7 @@ section p {
 
 .header-content {
     display: flex;
-    justify-content: space-between; /* Распределяем элементы по краям */
+    justify-content: space-between; /* Оставляем space-between для распределения лого и навигации */
     align-items: center;
     width: 100%;
     flex-wrap: nowrap;
@@ -193,8 +193,8 @@ section p {
 
 @media (max-width: 768px) {
     .header-content {
-        justify-content: flex-start; /* Выравниваем по левому краю для начала */
-        gap: 10px; /* Добавляем небольшой зазор между элементами */
+        /* Здесь не нужно менять justify-content, так как space-between уже работает */
+        /* padding: 0 10px; уже определен для .container */
     }
 }
 
@@ -207,35 +207,25 @@ section p {
         width: auto;
         text-align: left;
         margin-bottom: 0;
-        order: 1;
+        /* order: 1; - не требуется, если это первый элемент */
     }
     .logo img {
         height: 50px;
-        margin: 0; /* Убираем auto margin, чтобы не центрировало */
+        margin: 0;
     }
 }
 
-.logo img {
-    height: 60px;
-    display: block;
-    margin: 0 auto;
-    transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
-}
-
-.logo img:hover {
-    transform: scale(1.05);
-}
-
 .main-nav {
-    display: flex;
+    display: flex; /* Делаем main-nav flex-контейнером */
     align-items: center;
+    /* На десктопе это просто позиционирует nav-list */
 }
 
 @media (max-width: 768px) {
     .main-nav {
-        width: auto;
-        justify-content: flex-end;
-        order: 3;
+        /* main-nav - второй элемент в header-content, его space-between уже толкает вправо */
+        justify-content: flex-end; /* Выравниваем содержимое main-nav вправо */
+        flex-grow: 1; /* Позволяем main-nav занять доступное пространство */
     }
 }
 
@@ -324,41 +314,21 @@ section p {
 @media (max-width: 768px) {
     .hamburger-menu {
         display: block;
-        order: 3;
-        margin-left: 15px;
+        /* order: 3; - не нужно, если это последний элемент в flex-контейнере с flex-end */
+        margin-left: 15px; /* Отступ от переключателя языка */
     }
 }
-
-.hamburger-menu .bar {
-    display: block;
-    width: 100%;
-    height: 3px;
-    background-color: var(--color-dark-grey);
-    margin-bottom: 5px;
-    border-radius: 2px;
-    transition: all var(--transition-speed) ease-in-out;
-}
-
-.hamburger-menu .bar:last-child {
-    margin-bottom: 0;
-}
-
-.hamburger-menu.open .bar:nth-child(1) { transform: translateY(8px) rotate(45deg); }
-.hamburger-menu.open .bar:nth-child(2) { opacity: 0; }
-.hamburger-menu.open .bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
-
 
 .language-switcher {
     position: relative;
     display: inline-block;
-    margin-left: 20px;
+    margin-left: 20px; /* Отступ на десктопе */
 }
 
 @media (max-width: 768px) {
     .language-switcher {
-        margin-left: 0; /* Убираем отступ, чтобы был у самого края */
-        margin-right: auto; /* Отталкиваем вправо, чтобы он был слева от гамбургера */
-        order: 2;
+        margin-left: 0; /* Убираем десктопный отступ */
+        /* order: 2; - не нужно, если это первый видимый элемент в flex-контейнере с flex-end */
     }
 }
 
