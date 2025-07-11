@@ -144,7 +144,8 @@ def contact_popup(request):
                 plain_message,
                 settings.DEFAULT_FROM_EMAIL,
                 ['shirin@italiabezproblem.com',
-                 'marselcom379@gmail.com'],
+                'michele@italiabezproblem.com',
+                'info@italiabezproblem.com'],
                 fail_silently=False,
                 html_message=html_message,
             )
