@@ -24,14 +24,6 @@ ALLOWED_HOSTS = [
     'localhost',
 ]
 
-# ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
-# if not DEBUG:
-#     ALLOWED_HOSTS += [
-#         'italiabezproblem.com',
-#         'www.italiabezproblem.com',
-#         'italiabezproblem-ey9pg.ondigitalocean.app',
-#         'www.italiabezproblem-ey9pg.ondigitalocean.app']
-
 INSTALLED_APPS = [
     'modeltranslation',
     'django.contrib.admin',
@@ -43,6 +35,7 @@ INSTALLED_APPS = [
     'main',
     'crispy_forms',
     'crispy_bootstrap5',
+    'compressor',
 ]
 
 MIDDLEWARE = [
@@ -80,14 +73,11 @@ WSGI_APPLICATION = 'italia_bez_problem.wsgi.application'
 
 DATABASES = {
     'default': dj_database_url.config(
-        # For DigitalOcean App Platform, DATABASE_URL is provided as an environment variable.
-        # No need for a 'default' here if you're using their managed DB.
-        # If you have an external DB, ensure DATABASE_URL env var is set on App Platform.
         conn_max_age=600
     )
 }
-# This block is for local SQLite fallback if DATABASE_URL is not set.
-if 'DATABASE_URL' not in os.environ and DEBUG: # Only use SQLite fallback if DEBUG is True
+
+if 'DATABASE_URL' not in os.environ and DEBUG:
     DATABASES['default'] = {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
@@ -141,5 +131,25 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 CRISPY_TEMPLATE_PACK = "bootstrap5"
+
+COMPRESS_ENABLED = True
+COMPRESS_CSS_FILTERS = [
+    'compressor.filters.css_default.CssAbsoluteUrlFilter',
+    'compressor.filters.cssmin.CSSMinFilter',
+]
+COMPRESS_JS_FILTERS = [
+    'compressor.filters.jsmin.JSMinFilter',
+]
+
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'compressor.finders.CompressorFinder',
+)
+
+if os.environ.get('DEBUG') == 'True':
+    COMPRESS_ENABLED = False
+else:
+    COMPRESS_ENABLED = True
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'

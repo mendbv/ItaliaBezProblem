@@ -1,7 +1,6 @@
 {% extends 'main/base.html' %}
 {% load static %}
 {% load i18n %}
-{% load crispy_forms_tags %} {# Если используете django-crispy-forms, иначе убрать #}
 
 {% block content %}
 <section class="page-hero" style="background-image: url('{% static 'img/contact-hero.jpg' %}');">
@@ -15,7 +14,6 @@
     <div class="container">
         <h3>{% translate "Get in Touch" %}</h3>
 
-        {# Сообщения от Django (success/error) #}
         {% if messages %}
             <ul class="messages">
                 {% for message in messages %}
@@ -51,10 +49,8 @@
         <div class="contact-form-container animate-on-scroll">
             <h4>{% translate "Send Us a Message" %}</h4>
             <form method="post" class="contact-form">
-                {% csrf_token %} {# Важно для безопасности Django #}
-                {{ form.as_p }} {# Простой вывод полей формы #}
-                {# Если вы хотите более красивый вывод, рассмотрите django-crispy-forms #}
-                {# {{ form|crispy }} #}
+                {% csrf_token %}
+                {{ form.as_p }}
                 <button type="submit" class="btn">{% translate "Send Message" %}</button>
             </form>
         </div>

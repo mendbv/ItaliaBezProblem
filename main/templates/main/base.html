@@ -1,13 +1,16 @@
 {% load static %}
 {% load i18n %}
+{% load compress %}
 <!DOCTYPE html>
 <html lang="{{ LANGUAGE_CODE }}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% translate "Italia Bez Problem" %}</title>
+    {% compress css %}
     <link rel="stylesheet" href="{% static 'css/main.css' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    {% endcompress %}
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -34,7 +37,7 @@
                             {% get_available_languages as AVAILABLE_LANGUAGES %}
                             {% for lang_code, lang_name in AVAILABLE_LANGUAGES %}
                                 <option value="{{ lang_code }}" {% if lang_code == CURRENT_LANGUAGE %}selected{% endif %}>
-                                    {{ lang_code|upper }} {# Показываем код языка в верхнем регистре #}
+                                    {{ lang_code|upper }}
                                 </option>
                             {% endfor %}
                         </select>
@@ -85,10 +88,9 @@
         </div>
     </footer>
 
-    {# Floating Contact Button with Dropdown #}
     <div class="contact-float-button">
         <button class="main-contact-btn" aria-label="Contact Options">
-            <i class="fas fa-comments"></i> {# Иконка для общей кнопки связи #}
+            <i class="fas fa-comments"></i>
         </button>
         <div class="contact-dropdown-content">
             {% if company_info.whatsapp_link %}
@@ -98,7 +100,7 @@
             {% endif %}
             {% if company_info.telegram_link %}
                 <a href="{{ company_info.telegram_link }}" target="_blank" aria-label="Telegram">
-                    <i class="fab fa-telegram-plane"></i> {% translate "Telegram" %} {# Используем fa-telegram-plane #}
+                    <i class="fab fa-telegram-plane"></i> {% translate "Telegram" %}
                 </a>
             {% endif %}
             {% if company_info.email %}
@@ -109,8 +111,7 @@
         </div>
     </div>
 
-    {# Contact Popup Modal Structure #}
-    <div id="contactModal" class="modal" style="display: none;"> {# ЯВНО СКРЫВАЕМ МОДАЛЬНОЕ ОКНО СРАЗУ #}
+    <div id="contactModal" class="modal" style="display: none;">
         <div class="modal-content">
             <span class="close-button">&times;</span>
             <h3 class="modal-title">{% translate "Stay in touch with us!" %}</h3>
@@ -135,13 +136,11 @@
                 </div>
                 <button type="submit" class="btn">{% translate "Send Request" %}</button>
             </form>
-            <div id="popupMessage" class="popup-message"></div> {# Для сообщений об успехе/ошибке #}
+            <div id="popupMessage" class="popup-message"></div>
         </div>
     </div>
 
-
     <script>
-        // Hamburger menu functionality
         document.addEventListener('DOMContentLoaded', function() {
             const hamburger = document.querySelector('.hamburger-menu');
             const navList = document.querySelector('.nav-list');
@@ -153,7 +152,6 @@
                 });
             }
 
-            // Close menu when a link is clicked (for mobile)
             navList.querySelectorAll('a').forEach(link => {
                 link.addEventListener('click', () => {
                     if (navList.classList.contains('open')) {
@@ -163,23 +161,18 @@
                 });
             });
 
-            // Close menu when clicking outside
             document.addEventListener('click', function(event) {
                 if (!navList.contains(event.target) && !hamburger.contains(event.target)) {
                     if (navList.classList.contains('open')) {
                         navList.classList.remove('open');
                         hamburger.classList.remove('open');
                     }
-                    // Закрываем выпадающее меню контакта, если клик вне его
                     const contactFloatButton = document.querySelector('.contact-float-button');
                     if (contactFloatButton && !contactFloatButton.contains(event.target)) {
-                        // Здесь нет прямого класса 'active' для скрытия, т.к. используется :hover в CSS.
-                        // Если бы мы управляли видимостью через JS-класс, то здесь был бы contactFloatButton.classList.remove('active');
                     }
                 }
             });
 
-            // Smooth scrolling for anchor links (if any)
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function (e) {
                     e.preventDefault();
@@ -189,19 +182,18 @@
                 });
             });
 
-            // Animate on scroll
             const animateOnScrollElements = document.querySelectorAll('.animate-on-scroll');
             const observerOptions = {
-                root: null, // viewport
+                root: null,
                 rootMargin: '0px',
-                threshold: 0.1 // 10% of element visible
+                threshold: 0.1
             };
 
             const observer = new IntersectionObserver((entries, observer) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add('visible');
-                        observer.unobserve(entry.target); // Stop observing once visible
+                        observer.unobserve(entry.target);
                     }
                 });
             }, observerOptions);
@@ -210,60 +202,44 @@
                 observer.observe(element);
             });
 
-
-            // Popup Modal Logic
             const contactModal = document.getElementById('contactModal');
             const closeButton = document.querySelector('.close-button');
             const popupContactForm = document.getElementById('popupContactForm');
             const popupMessageDiv = document.getElementById('popupMessage');
 
-            // Function to show the modal
             function showModal() {
-                console.log('--- showModal() вызван. Показываем модальное окно. ---');
-                contactModal.style.display = 'flex'; // Используем flex для центрирования
-                document.body.classList.add('modal-open'); // Prevent scrolling
+                contactModal.style.display = 'flex';
+                document.body.classList.add('modal-open');
             }
 
-            // Function to hide the modal
             function hideModal() {
-                console.log('--- hideModal() вызван. Скрываем модальное окно. ---');
                 contactModal.style.display = 'none';
-                document.body.classList.remove('modal-open'); // Re-enable scrolling
-                popupContactForm.reset(); // Clear form fields
-                popupMessageDiv.textContent = ''; // Clear messages
-                popupMessageDiv.className = 'popup-message'; // Reset class
+                document.body.classList.remove('modal-open');
+                popupContactForm.reset();
+                popupMessageDiv.textContent = '';
+                popupMessageDiv.className = 'popup-message';
             }
 
-            // Close button event
             closeButton.addEventListener('click', hideModal);
 
-            // Close when clicking outside the modal content
             window.addEventListener('click', function(event) {
-                // Если клик был вне модального окна и не на самой кнопке, которая его открывает (если такая есть)
-                if (event.target === contactModal) { // Проверяем, что клик был именно по оверлею модального окна
+                if (event.target === contactModal) {
                     hideModal();
                 }
             });
 
-            // Show modal after 2 minutes (120000 ms) if not shown before
             let hasShownModal = localStorage.getItem('hasShownContactModal');
-            console.log('DEBUG: Значение hasShownModal из localStorage при загрузке:', hasShownModal);
 
-            // Проверяем, что hasShownModal не равен 'true'
             if (hasShownModal !== 'true') {
-                console.log('DEBUG: Поп-ап не показывался ранее (или localStorage был очищен). Устанавливаем таймер на 2 минуты (120000 мс).');
                 setTimeout(() => {
                     showModal();
-                    localStorage.setItem('hasShownContactModal', 'true'); // Set flag after showing
-                    console.log('DEBUG: Поп-ап показан и флаг "hasShownContactModal" установлен в localStorage: true');
-                }, 120000); // Show after 2 minutes (120000 milliseconds)
+                    localStorage.setItem('hasShownContactModal', 'true');
+                }, 120000);
             } else {
-                console.log('DEBUG: Поп-ап уже показывался (флаг "hasShownContactModal" в localStorage установлен в true). Не будем показывать его снова.');
             }
 
-            // Handle form submission via AJAX
             popupContactForm.addEventListener('submit', async function(e) {
-                e.preventDefault(); // Prevent default form submission
+                e.preventDefault();
 
                 const formData = new FormData(this);
                 const name = formData.get('name');
@@ -271,33 +247,29 @@
                 const phone = formData.get('phone');
                 const message = formData.get('message');
 
-                // Basic validation: at least email OR phone must be provided
                 if (!email && !phone) {
                     popupMessageDiv.textContent = '{% translate "Please provide either your email or phone number." %}';
                     popupMessageDiv.classList.add('error');
                     return;
                 }
 
-                // Client-side validation for name (required)
                 if (!name) {
                     popupMessageDiv.textContent = '{% translate "Please enter your name." %}';
                     popupMessageDiv.classList.add('error');
                     return;
                 }
 
-                // Clear previous messages
                 popupMessageDiv.textContent = '';
                 popupMessageDiv.className = 'popup-message';
                 popupMessageDiv.classList.add('loading');
                 popupMessageDiv.textContent = '{% translate "Sending..." %}';
-
 
                 try {
                     const response = await fetch(this.action, {
                         method: 'POST',
                         body: formData,
                         headers: {
-                            'X-CSRFToken': formData.get('csrfmiddlewaretoken') // Ensure CSRF token is sent
+                            'X-CSRFToken': formData.get('csrfmiddlewaretoken')
                         }
                     });
 
@@ -308,7 +280,7 @@
                     if (response.ok) {
                         popupMessageDiv.textContent = data.message;
                         popupMessageDiv.classList.add('success');
-                        setTimeout(hideModal, 3000); // Hide modal after 3 seconds on success
+                        setTimeout(hideModal, 3000);
                     } else {
                         popupMessageDiv.textContent = data.message || '{% translate "An error occurred. Please try again." %}';
                         popupMessageDiv.classList.add('error');
