@@ -19,7 +19,7 @@
                 </div>
                 <h1>{{ company_info.name }}</h1>
                 <h2>{{ company_info.slogan }}</h2>
-                <p class="clients-count-text">{% translate "Over" %} {{ company_info.clients_count }}+ {% translate "satisfied clients" %}</p>
+                <p class="clients-count-text">{% translate "Over" %} {{ company_info.clients_count }} {% translate "satisfied clients" %}</p>
             </div>
         </div>
     </section>
@@ -32,7 +32,7 @@
             <div class="facts-grid">
                 <div class="fact-item animate-on-scroll">
                     <i class="fas fa-users"></i>
-                    <h4>50+</h4>
+                    <h4>{{ company_info.clients_count }}</h4>
                     <p>{% translate "Happy Clients" %}</p>
                     <span class="fact-description">{% translate "Successfully settled and established businesses in Italy" %}</span>
                 </div>

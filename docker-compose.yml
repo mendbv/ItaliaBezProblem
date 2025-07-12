@@ -1,38 +1,33 @@
-# docker-compose.yml
-
 version: '3.8'
 
 services:
-  # Сервис базы данных PostgreSQL
   db:
-    image: postgres:15-alpine # Используем официальный образ PostgreSQL
+    image: postgres:15-alpine
     volumes:
-      - postgres_data:/var/lib/postgresql/data/ # Сохраняем данные БД в volume
+      - postgres_data:/var/lib/postgresql/data/
     environment:
-      POSTGRES_DB: italia_bez_problem_db # Имя базы данных
-      POSTGRES_USER: user # Пользователь БД
-      POSTGRES_PASSWORD: password # Пароль пользователя БД
-    restart: always # Всегда перезапускать контейнер, если он падает
+      POSTGRES_DB: italia_bez_problem_db
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+    restart: always
 
-  # Сервис веб-приложения Django
   web:
-    build: . # Собираем образ из текущей директории (используя Dockerfile)
-    command: gunicorn italia_bez_problem.wsgi:application --bind 0.0.0.0:8000 # Команда для запуска Django через Gunicorn
+    build: .
+    command: gunicorn italia_bez_problem.wsgi:application --bind 0.0.0.0:8000
     volumes:
-      - .:/app # Монтируем текущую директорию проекта в /app внутри контейнера
-      - media_volume:/app/media # Монтируем volume для пользовательских медиафайлов
+      - .:/app
+      - media_volume:/app/media
     ports:
-      - "8000:8000" # Пробрасываем порт 8000 контейнера на порт 8000 хоста
+      - "8000:8000"
     depends_on:
-      - db # Указываем зависимость от сервиса 'db' (запускать 'db' сначала)
+      - db
     environment:
-      DATABASE_URL: postgres://user:password@db:5432/italia_bez_problem_db # Переменная окружения для подключения к БД
-      DJANGO_SETTINGS_MODULE: italia_bez_problem.settings # Указываем файл настроек Django
-      SECRET_KEY: your_super_secret_key_here # !!! ОБЯЗАТЕЛЬНО ЗАМЕНИТЕ НА СЛОЖНЫЙ КЛЮЧ В ПРОДАКШЕНЕ !!!
-      DEBUG: "True" # Установите "False" для продакшена
-    restart: always # Всегда перезапускать контейнер, если он падает
+      DATABASE_URL: postgres://user:password@db:5432/italia_bez_problem_db
+      DJANGO_SETTINGS_MODULE: italia_bez_problem.settings
+      SECRET_KEY: your_super_secret_key_here
+      DEBUG: "True"
+    restart: always 
 
-# Определяем volumes для сохранения данных
 volumes:
-  postgres_data: # Volume для данных PostgreSQL
-  media_volume: # Volume для пользовательских медиафайлов (фото, видео)
+  postgres_data:
+  media_volume:

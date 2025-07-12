@@ -1,7 +1,4 @@
-// static/js/main.js
-
 document.addEventListener('DOMContentLoaded', function() {
-    // Логика бургер-меню
     const hamburger = document.querySelector('.hamburger-menu');
     const navList = document.querySelector('.nav-list');
 
@@ -12,16 +9,15 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Простая анимация появления при прокрутке (добавляет класс 'visible')
     const elementsToAnimate = document.querySelectorAll('.animate-on-scroll');
     const observer = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('visible');
-                observer.unobserve(entry.target); // Прекратить наблюдение после анимации
+                observer.unobserve(entry.target);
             }
         });
-    }, { threshold: 0.1 }); // Срабатывает, когда 10% элемента видно
+    }, { threshold: 0.1 });
 
     elementsToAnimate.forEach(element => {
         observer.observe(element);
